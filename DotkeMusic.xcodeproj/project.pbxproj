@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		322AD8601D2E68B800D6C6B2 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */; };
+		322AD8611D2E68B800D6C6B2 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3280959F1D25DF840000FCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3280959E1D25DF840000FCE0 /* AppDelegate.swift */; };
+		328095A11D25DF840000FCE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328095A01D25DF840000FCE0 /* ViewController.swift */; };
+		328095A41D25DF840000FCE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328095A21D25DF840000FCE0 /* Main.storyboard */; };
+		328095A61D25DF840000FCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 328095A51D25DF840000FCE0 /* Assets.xcassets */; };
+		328095A91D25DF840000FCE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328095A71D25DF840000FCE0 /* LaunchScreen.storyboard */; };
+		328095B41D25DF840000FCE0 /* DotkeMusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328095B31D25DF840000FCE0 /* DotkeMusicTests.swift */; };
+		328095BF1D25DF840000FCE0 /* DotkeMusicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328095BE1D25DF840000FCE0 /* DotkeMusicUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		328095B01D25DF840000FCE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 328095931D25DF840000FCE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3280959A1D25DF840000FCE0;
+			remoteInfo = DotkeMusic;
+		};
+		328095BB1D25DF840000FCE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 328095931D25DF840000FCE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3280959A1D25DF840000FCE0;
+			remoteInfo = DotkeMusic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		322AD8621D2E68B800D6C6B2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				322AD8611D2E68B800D6C6B2 /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
+		3280959B1D25DF840000FCE0 /* DotkeMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotkeMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3280959E1D25DF840000FCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		328095A01D25DF840000FCE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		328095A31D25DF840000FCE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		328095A51D25DF840000FCE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		328095A81D25DF840000FCE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		328095AA1D25DF840000FCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		328095AF1D25DF840000FCE0 /* DotkeMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DotkeMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		328095B31D25DF840000FCE0 /* DotkeMusicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotkeMusicTests.swift; sourceTree = "<group>"; };
+		328095B51D25DF840000FCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		328095BA1D25DF840000FCE0 /* DotkeMusicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DotkeMusicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		328095BE1D25DF840000FCE0 /* DotkeMusicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotkeMusicUITests.swift; sourceTree = "<group>"; };
+		328095C01D25DF840000FCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		328095981D25DF840000FCE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				322AD8601D2E68B800D6C6B2 /* AudioKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		328095AC1D25DF840000FCE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		328095B71D25DF840000FCE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		328095921D25DF840000FCE0 = {
+			isa = PBXGroup;
+			children = (
+				322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */,
+				3280959D1D25DF840000FCE0 /* DotkeMusic */,
+				328095B21D25DF840000FCE0 /* DotkeMusicTests */,
+				328095BD1D25DF840000FCE0 /* DotkeMusicUITests */,
+				3280959C1D25DF840000FCE0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3280959C1D25DF840000FCE0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3280959B1D25DF840000FCE0 /* DotkeMusic.app */,
+				328095AF1D25DF840000FCE0 /* DotkeMusicTests.xctest */,
+				328095BA1D25DF840000FCE0 /* DotkeMusicUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3280959D1D25DF840000FCE0 /* DotkeMusic */ = {
+			isa = PBXGroup;
+			children = (
+				3280959E1D25DF840000FCE0 /* AppDelegate.swift */,
+				328095A01D25DF840000FCE0 /* ViewController.swift */,
+				328095A21D25DF840000FCE0 /* Main.storyboard */,
+				328095A51D25DF840000FCE0 /* Assets.xcassets */,
+				328095A71D25DF840000FCE0 /* LaunchScreen.storyboard */,
+				328095AA1D25DF840000FCE0 /* Info.plist */,
+			);
+			path = DotkeMusic;
+			sourceTree = "<group>";
+		};
+		328095B21D25DF840000FCE0 /* DotkeMusicTests */ = {
+			isa = PBXGroup;
+			children = (
+				328095B31D25DF840000FCE0 /* DotkeMusicTests.swift */,
+				328095B51D25DF840000FCE0 /* Info.plist */,
+			);
+			path = DotkeMusicTests;
+			sourceTree = "<group>";
+		};
+		328095BD1D25DF840000FCE0 /* DotkeMusicUITests */ = {
+			isa = PBXGroup;
+			children = (
+				328095BE1D25DF840000FCE0 /* DotkeMusicUITests.swift */,
+				328095C01D25DF840000FCE0 /* Info.plist */,
+			);
+			path = DotkeMusicUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3280959A1D25DF840000FCE0 /* DotkeMusic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 328095C31D25DF840000FCE0 /* Build configuration list for PBXNativeTarget "DotkeMusic" */;
+			buildPhases = (
+				328095971D25DF840000FCE0 /* Sources */,
+				328095981D25DF840000FCE0 /* Frameworks */,
+				328095991D25DF840000FCE0 /* Resources */,
+				322AD8621D2E68B800D6C6B2 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DotkeMusic;
+			productName = DotkeMusic;
+			productReference = 3280959B1D25DF840000FCE0 /* DotkeMusic.app */;
+			productType = "com.apple.product-type.application";
+		};
+		328095AE1D25DF840000FCE0 /* DotkeMusicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 328095C61D25DF840000FCE0 /* Build configuration list for PBXNativeTarget "DotkeMusicTests" */;
+			buildPhases = (
+				328095AB1D25DF840000FCE0 /* Sources */,
+				328095AC1D25DF840000FCE0 /* Frameworks */,
+				328095AD1D25DF840000FCE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				328095B11D25DF840000FCE0 /* PBXTargetDependency */,
+			);
+			name = DotkeMusicTests;
+			productName = DotkeMusicTests;
+			productReference = 328095AF1D25DF840000FCE0 /* DotkeMusicTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		328095B91D25DF840000FCE0 /* DotkeMusicUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 328095C91D25DF840000FCE0 /* Build configuration list for PBXNativeTarget "DotkeMusicUITests" */;
+			buildPhases = (
+				328095B61D25DF840000FCE0 /* Sources */,
+				328095B71D25DF840000FCE0 /* Frameworks */,
+				328095B81D25DF840000FCE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				328095BC1D25DF840000FCE0 /* PBXTargetDependency */,
+			);
+			name = DotkeMusicUITests;
+			productName = DotkeMusicUITests;
+			productReference = 328095BA1D25DF840000FCE0 /* DotkeMusicUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		328095931D25DF840000FCE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Dotan Tamir";
+				TargetAttributes = {
+					3280959A1D25DF840000FCE0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					328095AE1D25DF840000FCE0 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 3280959A1D25DF840000FCE0;
+					};
+					328095B91D25DF840000FCE0 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 3280959A1D25DF840000FCE0;
+					};
+				};
+			};
+			buildConfigurationList = 328095961D25DF840000FCE0 /* Build configuration list for PBXProject "DotkeMusic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 328095921D25DF840000FCE0;
+			productRefGroup = 3280959C1D25DF840000FCE0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3280959A1D25DF840000FCE0 /* DotkeMusic */,
+				328095AE1D25DF840000FCE0 /* DotkeMusicTests */,
+				328095B91D25DF840000FCE0 /* DotkeMusicUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		328095991D25DF840000FCE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				328095A91D25DF840000FCE0 /* LaunchScreen.storyboard in Resources */,
+				328095A61D25DF840000FCE0 /* Assets.xcassets in Resources */,
+				328095A41D25DF840000FCE0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		328095AD1D25DF840000FCE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		328095B81D25DF840000FCE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		328095971D25DF840000FCE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				328095A11D25DF840000FCE0 /* ViewController.swift in Sources */,
+				3280959F1D25DF840000FCE0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		328095AB1D25DF840000FCE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				328095B41D25DF840000FCE0 /* DotkeMusicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		328095B61D25DF840000FCE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				328095BF1D25DF840000FCE0 /* DotkeMusicUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		328095B11D25DF840000FCE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3280959A1D25DF840000FCE0 /* DotkeMusic */;
+			targetProxy = 328095B01D25DF840000FCE0 /* PBXContainerItemProxy */;
+		};
+		328095BC1D25DF840000FCE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3280959A1D25DF840000FCE0 /* DotkeMusic */;
+			targetProxy = 328095BB1D25DF840000FCE0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		328095A21D25DF840000FCE0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				328095A31D25DF840000FCE0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		328095A71D25DF840000FCE0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				328095A81D25DF840000FCE0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		328095C11D25DF840000FCE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		328095C21D25DF840000FCE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		328095C41D25DF840000FCE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = DotkeMusic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		328095C51D25DF840000FCE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = DotkeMusic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		328095C71D25DF840000FCE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DotkeMusicTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusicTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DotkeMusic.app/DotkeMusic";
+			};
+			name = Debug;
+		};
+		328095C81D25DF840000FCE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DotkeMusicTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusicTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DotkeMusic.app/DotkeMusic";
+			};
+			name = Release;
+		};
+		328095CA1D25DF840000FCE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DotkeMusicUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = DotkeMusic;
+			};
+			name = Debug;
+		};
+		328095CB1D25DF840000FCE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DotkeMusicUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = DotkeMusic;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		328095961D25DF840000FCE0 /* Build configuration list for PBXProject "DotkeMusic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				328095C11D25DF840000FCE0 /* Debug */,
+				328095C21D25DF840000FCE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		328095C31D25DF840000FCE0 /* Build configuration list for PBXNativeTarget "DotkeMusic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				328095C41D25DF840000FCE0 /* Debug */,
+				328095C51D25DF840000FCE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		328095C61D25DF840000FCE0 /* Build configuration list for PBXNativeTarget "DotkeMusicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				328095C71D25DF840000FCE0 /* Debug */,
+				328095C81D25DF840000FCE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		328095C91D25DF840000FCE0 /* Build configuration list for PBXNativeTarget "DotkeMusicUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				328095CA1D25DF840000FCE0 /* Debug */,
+				328095CB1D25DF840000FCE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 328095931D25DF840000FCE0 /* Project object */;
+}
