@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  DotkeMusic
-//
-//  Created by Dotan Tamir on 1/07/2016.
-//  Copyright © 2016 Dotan Tamir. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
