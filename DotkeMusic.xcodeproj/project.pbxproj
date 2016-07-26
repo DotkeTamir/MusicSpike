@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32182E281D47885F00A707CB /* MidiNoteBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32182E271D47885F00A707CB /* MidiNoteBlock.swift */; };
 		322AD8601D2E68B800D6C6B2 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */; };
 		322AD8611D2E68B800D6C6B2 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3280959F1D25DF840000FCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3280959E1D25DF840000FCE0 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		32182E271D47885F00A707CB /* MidiNoteBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidiNoteBlock.swift; sourceTree = "<group>"; };
 		322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
 		3280959B1D25DF840000FCE0 /* DotkeMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotkeMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3280959E1D25DF840000FCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				328095A51D25DF840000FCE0 /* Assets.xcassets */,
 				328095A71D25DF840000FCE0 /* LaunchScreen.storyboard */,
 				328095AA1D25DF840000FCE0 /* Info.plist */,
+				32182E271D47885F00A707CB /* MidiNoteBlock.swift */,
 			);
 			path = DotkeMusic;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			files = (
 				328095A11D25DF840000FCE0 /* ViewController.swift in Sources */,
 				3280959F1D25DF840000FCE0 /* AppDelegate.swift in Sources */,
+				32182E281D47885F00A707CB /* MidiNoteBlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -429,6 +434,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -436,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
