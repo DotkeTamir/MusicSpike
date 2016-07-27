@@ -29,14 +29,14 @@ class ViewController: UIViewController {
         
         line.addAnimation(fadeAnimation, forKey: "transform.translation.y")
         
-        self.gridChangeButton.setTitle(String(beatGrid), forState: UIControlState.Normal)
+        self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
     }
     
     func layerToDraw() -> Array<MidiNoteBlock> {
         var blocks: Array<MidiNoteBlock> = Array<MidiNoteBlock>()
         let noBlocks = Float(self.noOfBars) / self.beatGrid
-        let blockHight = self.view.frame.size.width / CGFloat( noOfNotesInAnOctave)
-        let blockWidth = self.view.frame.size.height / CGFloat( noBlocks)
+        let blockHight = self.view.bounds.size.width / CGFloat( noOfNotesInAnOctave)
+        let blockWidth = self.view.bounds.size.height / CGFloat( noBlocks)
         
         for row in 0..<noOfNotesInAnOctave{
             for col in 0..<Int(noBlocks) {
@@ -70,12 +70,29 @@ class ViewController: UIViewController {
     }
     
     @IBAction func gridChangeTapped(sender: AnyObject) {
-        beatGrid /= 2;
+        self.beatGrid /= 2;
         
-        if(beatGrid == 1/64){
-            beatGrid = 1
+        if(self.beatGrid == 1/64){
+            self.beatGrid = 1
         }
-        self.gridChangeButton.setTitle(String(beatGrid), forState: UIControlState.Normal)
+        self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
         view.layoutIfNeeded()
+    }
+    
+    func displayLabelForGridButton(lBeatGrid: Float) -> String {
+        if(lBeatGrid == 1){
+            return "1"
+        } else if(lBeatGrid == (1/2)){
+            return "1/2"
+        }else if(lBeatGrid == (1/4)){
+            return "1/4"
+        }else if(lBeatGrid == (1/8)){
+            return "1/8"
+        }else if(lBeatGrid == (1/16)){
+            return "1/16"
+        }else if(lBeatGrid == (1/32)){
+            return "1/32"
+        }
+        return ""
     }
 }
