@@ -22,6 +22,10 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdG-wT-Rz1" userLabel="Line Animation">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifb-TO-uun" userLabel="Grid">
                                 <rect key="frame" x="520" y="540" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.7607843279838562" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,16 +44,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="hdG-wT-Rz1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="50n-AW-2Jw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hdG-wT-Rz1" secondAttribute="bottom" id="9I1-r9-PKY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ifb-TO-uun" secondAttribute="bottom" constant="10" id="QcR-dp-GUR"/>
                             <constraint firstItem="1Ie-YV-UXn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="SvC-jF-mXM"/>
                             <constraint firstAttribute="trailing" secondItem="1Ie-YV-UXn" secondAttribute="trailing" id="eau-gT-poV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ifb-TO-uun" secondAttribute="trailing" constant="10" id="f6s-9F-VyO"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1Ie-YV-UXn" secondAttribute="bottom" id="hnU-wq-PY3"/>
                             <constraint firstItem="1Ie-YV-UXn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pD8-qX-jt8"/>
+                            <constraint firstItem="hdG-wT-Rz1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="q7I-BA-a8e"/>
+                            <constraint firstAttribute="trailing" secondItem="hdG-wT-Rz1" secondAttribute="trailing" id="xlx-A8-6qp"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="animationView" destination="hdG-wT-Rz1" id="ha3-iy-VSK"/>
                         <outlet property="gridChangeButton" destination="ifb-TO-uun" id="g1d-z6-FzM"/>
                         <outlet property="gridVIew" destination="1Ie-YV-UXn" id="IxM-VY-Kcv"/>
                     </connections>
