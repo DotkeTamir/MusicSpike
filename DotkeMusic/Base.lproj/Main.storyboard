@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,11 +14,45 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="center" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ie-YV-UXn" userLabel="grid view">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifb-TO-uun" userLabel="Grid">
+                                <rect key="frame" x="520" y="540" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.7607843279838562" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ax5-Pv-DdY"/>
+                                    <constraint firstAttribute="width" constant="50" id="ms5-W1-9MI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="gridChangeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2av-fX-DJB"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ifb-TO-uun" secondAttribute="bottom" constant="10" id="QcR-dp-GUR"/>
+                            <constraint firstItem="1Ie-YV-UXn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="SvC-jF-mXM"/>
+                            <constraint firstAttribute="trailing" secondItem="1Ie-YV-UXn" secondAttribute="trailing" id="eau-gT-poV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ifb-TO-uun" secondAttribute="trailing" constant="10" id="f6s-9F-VyO"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1Ie-YV-UXn" secondAttribute="bottom" id="hnU-wq-PY3"/>
+                            <constraint firstItem="1Ie-YV-UXn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pD8-qX-jt8"/>
+                        </constraints>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="gridChangeButton" destination="ifb-TO-uun" id="g1d-z6-FzM"/>
+                        <outlet property="gridVIew" destination="1Ie-YV-UXn" id="IxM-VY-Kcv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
