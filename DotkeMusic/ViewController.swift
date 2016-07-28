@@ -45,7 +45,9 @@ class ViewController: UIViewController {
         
         for i in 0..<self.blocks.count {
             if(CGRectContainsPoint(blocks[i].rect, tappedPoint)){
-                blocks[i].noteColor = UIColor.greenColor().CGColor
+                blocks[i].isSelected = !blocks[i].isSelected
+                blocks[i].noteColor = blocks[i].isSelected ? UIColor.greenColor().CGColor : UIColor.blackColor().CGColor
+
                 break
             }
         }
@@ -62,19 +64,27 @@ class ViewController: UIViewController {
             for col in 0..<Int(noBlocks) {
                 let rect = CGRectMake(CGFloat(CGFloat(row)*blockHight),(CGFloat(col)*CGFloat(blockWidth)),blockHight,blockWidth)
                 let block = MidiNoteBlock(rect: rect, noteColor: UIColor.blackColor().CGColor)
-                blocks.append(block)
-                
+                let someBlock = self.shouldAddNote(rect.origin)
+                if(someBlock == nil){
+                    blocks.append(block)
+                }
             }
         }
-        return blocks;
+        self.blocks.appendContentsOf(blocks)
+        return self.blocks
     }
     
-    override func viewWillLayoutSubviews() {
-        self.gridVIew.layer.sublayers?.removeAll()
-        if(self.blocks.count == 0){
-//            self.blocks = self.layerToDraw()
+    func shouldAddNote(origiin: CGPoint) ->  MidiNoteBlock? {
+        for i in 0..<self.blocks.count{
+            if(CGPointEqualToPoint(origiin, blocks[i].rect.origin)){
+                return self.blocks[i]
+            }
         }
-        
+        return nil
+    }
+    override func viewWillLayoutSubviews() {
+//        self.gridVIew.layer.sublayers?.removeAll()
+
         for i in 0..<blocks.count {
             let layer = CAShapeLayer()
             let block = blocks[i]
@@ -97,6 +107,7 @@ class ViewController: UIViewController {
         
         if(self.beatGrid == 1/64){
             self.beatGrid = 1
+            self.blocks.removeAll()
         }
         self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
         self.blocks = self.layerToDraw()
