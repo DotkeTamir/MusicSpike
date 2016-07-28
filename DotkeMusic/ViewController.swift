@@ -1,10 +1,14 @@
 import UIKit
+import AudioKit
 
 class ViewController: UIViewController {
     
     var beatGrid : Float = (1/4)
     var noOfBars  = 1
     let noOfNotesInAnOctave = 12
+    var blocks: Array<MidiNoteBlock> = Array<MidiNoteBlock>()
+
+    var midi  = AKMIDI()
     
     @IBOutlet weak var gridVIew: UIView!
     @IBOutlet weak var gridChangeButton: UIButton!
@@ -12,6 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.blocks = self.layerToDraw()
+
         let line = CAShapeLayer()
         line.path = UIBezierPath(roundedRect: CGRect(x: 0 , y: 5, width: self.view.bounds.size.width, height: 1), cornerRadius: 0).CGPath
         line.backgroundColor = UIColor.yellowColor().CGColor
@@ -30,6 +36,20 @@ class ViewController: UIViewController {
         line.addAnimation(fadeAnimation, forKey: "transform.translation.y")
         
         self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        self.animationView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func handleTap(gestureRecognizer: UIGestureRecognizer) {
+        let tappedPoint = gestureRecognizer.locationInView(self.gridVIew)
+        
+        for i in 0..<self.blocks.count {
+            if(CGRectContainsPoint(blocks[i].rect, tappedPoint)){
+                blocks[i].noteColor = UIColor.greenColor().CGColor
+                break
+            }
+        }
+        view.setNeedsLayout()
     }
     
     func layerToDraw() -> Array<MidiNoteBlock> {
@@ -41,7 +61,7 @@ class ViewController: UIViewController {
         for row in 0..<noOfNotesInAnOctave{
             for col in 0..<Int(noBlocks) {
                 let rect = CGRectMake(CGFloat(CGFloat(row)*blockHight),(CGFloat(col)*CGFloat(blockWidth)),blockHight,blockWidth)
-                let block = MidiNoteBlock(rect: rect)
+                let block = MidiNoteBlock(rect: rect, noteColor: UIColor.blackColor().CGColor)
                 blocks.append(block)
                 
             }
@@ -51,13 +71,15 @@ class ViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         self.gridVIew.layer.sublayers?.removeAll()
-        let blocks = self.layerToDraw()
+        if(self.blocks.count == 0){
+//            self.blocks = self.layerToDraw()
+        }
         
         for i in 0..<blocks.count {
             let layer = CAShapeLayer()
             let block = blocks[i]
             layer.path = UIBezierPath(roundedRect: block.rect, cornerRadius: 0).CGPath
-            layer.backgroundColor = UIColor.blueColor().CGColor
+            layer.fillColor = block.noteColor
             layer.lineWidth = 1.0
             layer.strokeColor = UIColor.redColor().CGColor
           self.gridVIew.layer.addSublayer(layer)
@@ -65,6 +87,7 @@ class ViewController: UIViewController {
         }
 
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -76,6 +99,7 @@ class ViewController: UIViewController {
             self.beatGrid = 1
         }
         self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
+        self.blocks = self.layerToDraw()
         view.layoutIfNeeded()
     }
     

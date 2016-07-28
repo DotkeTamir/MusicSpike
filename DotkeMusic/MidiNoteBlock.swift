@@ -5,9 +5,11 @@ import UIKit
 class MidiNoteBlock: NSObject {
     
     var rect :CGRect
+    var noteColor : CGColor
     
-    init(rect: CGRect){
+    init(rect: CGRect, noteColor: CGColor){
         self.rect = rect
+        self.noteColor = noteColor
         
     }
 }
