@@ -8,9 +8,14 @@ class MidiNoteBlock: NSObject {
     var noteColor : CGColor
     var isSelected : Bool = false
     
-    init(rect: CGRect, noteColor: CGColor){
+    let noteValue: Int
+    let notePosition: Float
+    
+    init(rect: CGRect, noteColor: CGColor, noteValue: Int, notePosition: Float){
         self.rect = rect
         self.noteColor = noteColor
+        self.notePosition = notePosition == 0 ? 0.001 : notePosition
+        self.noteValue = noteValue
         
     }
 }
