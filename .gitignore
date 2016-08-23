@@ -17,6 +17,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+DotkeMusic.xcodeproj/project.xcworkspace/xcuserdata/dotantamir.xcuserdatad/UserInterfaceState.xcuserstate
+
 *.pyc
 Report/
 *.log
@@ -32,12 +34,6 @@ Pods
 build/Screenshots/
 
 slather/
-MIBMobileFirst.xcworkspace/xcshareddata
-test_output
+DotkeMusic.xcworkspace/xcshareddata
 
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-fastlane/README.md
+test_output
