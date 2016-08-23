@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3275A9441D6CF79500FA80D3 /* SeqMidiNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */; };
+		3275A9461D6CF80B00FA80D3 /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A9451D6CF80B00FA80D3 /* Conductor.swift */; };
 		32A42E6A1D6525630021B94E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E691D6525630021B94E /* AppDelegate.swift */; };
 		32A42E6C1D6525630021B94E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E6B1D6525630021B94E /* ViewController.swift */; };
 		32A42E6F1D6525630021B94E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A42E6D1D6525630021B94E /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeqMidiNote.swift; path = Seq/SeqMidiNote.swift; sourceTree = "<group>"; };
+		3275A9451D6CF80B00FA80D3 /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
 		32A42E661D6525620021B94E /* DKBeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKBeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A42E691D6525630021B94E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32A42E6B1D6525630021B94E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				32A42E701D6525630021B94E /* Assets.xcassets */,
 				32A42E721D6525630021B94E /* LaunchScreen.storyboard */,
 				32A42E751D6525630021B94E /* Info.plist */,
+				3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */,
+				3275A9451D6CF80B00FA80D3 /* Conductor.swift */,
 			);
 			path = DKBeatMaker;
 			sourceTree = "<group>";
@@ -278,6 +284,8 @@
 			files = (
 				32A42E6C1D6525630021B94E /* ViewController.swift in Sources */,
 				32A42E6A1D6525630021B94E /* AppDelegate.swift in Sources */,
+				3275A9441D6CF79500FA80D3 /* SeqMidiNote.swift in Sources */,
+				3275A9461D6CF80B00FA80D3 /* Conductor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +520,7 @@
 				32A42E901D6525630021B94E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		32A42E911D6525630021B94E /* Build configuration list for PBXNativeTarget "DKBeatMakerTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +529,7 @@
 				32A42E931D6525630021B94E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		32A42E941D6525630021B94E /* Build configuration list for PBXNativeTarget "DKBeatMakerUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +538,7 @@
 				32A42E961D6525630021B94E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
