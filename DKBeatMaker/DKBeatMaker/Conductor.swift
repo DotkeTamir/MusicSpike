@@ -79,7 +79,7 @@ class Conductor {
         sequence.enableLooping()
         sequence.setTempo(30)
         //        sequence.setTempo(120)
-        sequence.play()
+//        sequence.play()
         
     }
     func generateNewMelodicSequence(notes: Array<SeqMidiNote>) {
@@ -150,4 +150,12 @@ class Conductor {
         currentTempo -= 1.0
         sequence.setTempo(currentTempo)
     }
+    func startPlaying() {
+             sequence.play()
+    }
+    func stopPlaying() {
+        sequence.stop()
+    }
+
+    
 }
