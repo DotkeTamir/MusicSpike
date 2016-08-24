@@ -3,6 +3,11 @@ import AudioKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var synthTapped: UIBarButtonItem!
+    
+    @IBOutlet weak var pauseTapped: UIBarButtonItem!
+    @IBOutlet weak var playTapped: UIBarButtonItem!
+    
     // grid object
     let line = CAShapeLayer()
     var blocks: Array<SeqMidiNote> = Array<SeqMidiNote>()
@@ -15,11 +20,13 @@ class ViewController: UIViewController {
     var midiNotesHighlighted: Array<SeqMidiNote> = Array<SeqMidiNote>()
     var midi  = AKMIDI()
     let conductor = Conductor()
+    let lineAnimation = CABasicAnimation(keyPath: "transform.translation.x")
     
     @IBOutlet weak var notesView: UIView!
     @IBOutlet weak var gridVIew: UIView!
     @IBOutlet weak var gridChangeButton: UIButton!
     @IBOutlet weak var animationView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gridDictionary["1/4"] = self.createGridLayer(0.25)
@@ -36,14 +43,13 @@ class ViewController: UIViewController {
         
         
         
-        let fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
-        fadeAnimation.fromValue = 1.0
-        fadeAnimation.toValue = self.view.frame.size.width
-        fadeAnimation.duration = 2
-        fadeAnimation.repeatCount = Float(Int.max)
-        fadeAnimation.delegate = self
+//        fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+        self.lineAnimation.fromValue = 1.0
+        self.lineAnimation.toValue = self.view.frame.size.width
+        self.lineAnimation.duration = 2
+        self.lineAnimation.repeatCount = Float(Int.max)
+        self.lineAnimation.delegate = self
         conductor.generateNewMelodicSequence(self.midiNotesHighlighted)
-        line.addAnimation(fadeAnimation, forKey: "transform.translation.y")
         
         self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
@@ -171,5 +177,15 @@ class ViewController: UIViewController {
             }
         }
         return self.blocks
+    }
+    
+    @IBAction func pausedTapped(sender: AnyObject) {
+        line.removeAnimationForKey("transform.translation.y")
+        self.conductor.stopPlaying()
+    }
+    
+    @IBAction func playTapped(sender: AnyObject) {
+        line.addAnimation(self.lineAnimation, forKey: "transform.translation.y")
+        self.conductor.startPlaying()
     }
 }
