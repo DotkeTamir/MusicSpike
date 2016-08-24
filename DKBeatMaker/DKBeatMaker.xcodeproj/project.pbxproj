@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3275A9441D6CF79500FA80D3 /* SeqMidiNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */; };
 		3275A9461D6CF80B00FA80D3 /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A9451D6CF80B00FA80D3 /* Conductor.swift */; };
+		3275D7821D6E4845006CEF3E /* SynthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275D7811D6E4845006CEF3E /* SynthViewController.swift */; };
 		32A42E6A1D6525630021B94E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E691D6525630021B94E /* AppDelegate.swift */; };
 		32A42E6C1D6525630021B94E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E6B1D6525630021B94E /* ViewController.swift */; };
 		32A42E6F1D6525630021B94E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A42E6D1D6525630021B94E /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeqMidiNote.swift; path = Seq/SeqMidiNote.swift; sourceTree = "<group>"; };
 		3275A9451D6CF80B00FA80D3 /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
+		3275D7811D6E4845006CEF3E /* SynthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynthViewController.swift; path = Instruments/SynthViewController.swift; sourceTree = "<group>"; };
 		32A42E661D6525620021B94E /* DKBeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKBeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A42E691D6525630021B94E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32A42E6B1D6525630021B94E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				32A42E751D6525630021B94E /* Info.plist */,
 				3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */,
 				3275A9451D6CF80B00FA80D3 /* Conductor.swift */,
+				3275D7811D6E4845006CEF3E /* SynthViewController.swift */,
 			);
 			path = DKBeatMaker;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3275D7821D6E4845006CEF3E /* SynthViewController.swift in Sources */,
 				32A42E6C1D6525630021B94E /* ViewController.swift in Sources */,
 				32A42E6A1D6525630021B94E /* AppDelegate.swift in Sources */,
 				3275A9441D6CF79500FA80D3 /* SeqMidiNote.swift in Sources */,

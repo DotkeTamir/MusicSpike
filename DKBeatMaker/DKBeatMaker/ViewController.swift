@@ -188,4 +188,8 @@ class ViewController: UIViewController {
         line.addAnimation(self.lineAnimation, forKey: "transform.translation.y")
         self.conductor.startPlaying()
     }
+    
+    @IBAction func synthTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("synthSegue", sender: self)
+    }
 }
