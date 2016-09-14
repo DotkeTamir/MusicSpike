@@ -13,7 +13,7 @@ class Conductor {
     var snareMixer = AKMixer()
     var snareVerb: AKReverb?
     
-    var sequence = AKSequencer()
+    var sequence : AKSequencer
     var mixer = AKMixer()
     var pumper: AKCompressor?
     
@@ -24,6 +24,7 @@ class Conductor {
     let sequenceLength = AKDuration(beats: 1.0 ,tempo: 60)
     
     init() {
+        sequence = AKSequencer()
         fmOscillator.modulatingMultiplier = 3
         fmOscillator.modulationIndex = 0.3
         fmOscillator.releaseDuration = 0.01
@@ -111,22 +112,22 @@ class Conductor {
     
     func generateDrumSequence(notes: Array<SeqMidiNote>) {
         
-        
+        sequence.tracks[1].clear()
         //        let numberOfSteps = Int(Float(sequenceLength.beats)/stepSize)
         for i in 0 ..< notes.count {
-            sequence.tracks[notes[i].noteValue].clear()
+//            sequence.tracks[notes[i].noteValue].clear()
             //            let step = Double(i) * stepSize
             print("notes[i].notePosition is \((notes[i].notePosition))")
             print("note value is \((notes[i].noteValue))")
             
-            sequence.tracks[2].add(noteNumber: 60,
+            sequence.tracks[1].add(noteNumber: 60,
                                    velocity: 60,
                                    position: AKDuration(beats: Double(notes[i].notePosition)),
                                    duration: AKDuration(beats: 0.5))
         }
         //        print("position:%@",sequence.currentPosition)
         //        print("debug :%@",sequence.debug())
-        
+        sequence.setLength(sequenceLength)
     }
     
     func randomBool() -> Bool {

@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             }
         }
         self.conductor.generateNewMelodicSequence(self.midiNotesHighlighted)
-        //        self.conductor.generateDrumSequence(self.midiNotesHighlighted)
+//                self.conductor.generateDrumSequence(self.midiNotesHighlighted)
         view.setNeedsLayout()
     }
     
