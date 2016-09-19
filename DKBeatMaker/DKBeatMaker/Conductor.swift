@@ -18,7 +18,6 @@ class Conductor {
     var mixer = AKMixer()
     var pumper: AKCompressor?
     
-    var currentTempo = 110.0
     var currentNotes: Array<SeqMidiNote>!
     
     let scale1: [Int] = [0, 2, 4, 7, 9]
@@ -81,30 +80,14 @@ class Conductor {
         
         sequence.enableLooping()
         sequence.setTempo(30)
-        //        sequence.setTempo(120)
-//        sequence.play()
+        
         
     }
     func generateNewMelodicSequence(notes: Array<SeqMidiNote>) {
         self.currentNotes = notes
         sequence.tracks[0].clear()
         sequence.setLength(sequenceLength)
-        //        let numberOfSteps = Int(Float(sequenceLength.beats)/stepSize)
-        //        print("steps in sequence: \(numberOfSteps)")
         for i in 0 ..< notes.count {
-            //            if (arc4random_uniform(17) > 12) {
-            //            let step = Double(i) * notes[i].notePosition
-            ////                 print("step is \(step)")
-            //                let scale = (minor ? scale2 : scale1)
-            //                let scaleOffset = arc4random_uniform(UInt32(scale.count)-1)
-            //                var octaveOffset = 0
-            //                for _ in 0 ..< 2 {
-            //                    octaveOffset += Int(12 * (((Float(arc4random_uniform(2)))*2.0)+(-1.0)))
-            //                    octaveOffset = Int((Float(arc4random_uniform(2))) * (Float(arc4random_uniform(2))) * Float(octaveOffset))
-            //                }
-            print("notes[i].notePosition is \((notes[i].notePosition))")
-            print("note value is \((50+notes[i].noteValue))")
-            //                let noteToAdd = 60 + scale[Int(scaleOffset)] + octaveOffset
             sequence.tracks[0].add(noteNumber: self.octave+notes[i].noteValue,
                                    velocity: 100,
                                    position: AKDuration(beats: Double(notes[i].notePosition)),
@@ -116,20 +99,12 @@ class Conductor {
     func generateDrumSequence(notes: Array<SeqMidiNote>) {
         
         sequence.tracks[1].clear()
-        //        let numberOfSteps = Int(Float(sequenceLength.beats)/stepSize)
         for i in 0 ..< notes.count {
-//            sequence.tracks[notes[i].noteValue].clear()
-            //            let step = Double(i) * stepSize
-            print("notes[i].notePosition is \((notes[i].notePosition))")
-            print("note value is \((notes[i].noteValue))")
-            
             sequence.tracks[1].add(noteNumber: 60,
                                    velocity: 60,
                                    position: AKDuration(beats: Double(notes[i].notePosition)),
                                    duration: AKDuration(beats: 0.5))
         }
-        //        print("position:%@",sequence.currentPosition)
-        //        print("debug :%@",sequence.debug())
         sequence.setLength(sequenceLength)
     }
     
@@ -144,16 +119,7 @@ class Conductor {
     func clear() {
         sequence.tracks[0].clear()
     }
-    
-    func increaseTempo() {
-        currentTempo += 1.0
-        sequence.setTempo(currentTempo)
-    }
-    
-    func decreaseTempo() {
-        currentTempo -= 1.0
-        sequence.setTempo(currentTempo)
-    }
+
     func startPlaying() {
              sequence.play()
     }

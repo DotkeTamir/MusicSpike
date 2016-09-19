@@ -33,7 +33,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifb-TO-uun" userLabel="Grid">
                                 <rect key="frame" x="520" y="540" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.7607843279838562" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.61176470588235299" green="0.62352941176470589" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ax5-Pv-DdY"/>
                                     <constraint firstAttribute="width" constant="50" id="ms5-W1-9MI"/>
@@ -68,16 +68,19 @@
                     <navigationItem key="navigationItem" title="DK B Maker" id="jUa-Sh-dvM">
                         <leftBarButtonItems>
                             <barButtonItem systemItem="play" id="hn5-3y-2FB">
+                                <color key="tintColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="playTapped:" destination="BYZ-38-t0r" id="DJc-BI-GRm"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="pause" id="1as-HC-3he">
+                                <color key="tintColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="pausedTapped:" destination="BYZ-38-t0r" id="fAK-n3-V4V"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Synth" id="efR-Vq-bz6">
+                                <color key="tintColor" red="0.61176470588235299" green="0.62352941176470589" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="synthTapped:" destination="BYZ-38-t0r" id="gTk-7R-WH0"/>
                                 </connections>
@@ -191,7 +194,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM2-hB-O3L" userLabel="OctavDown">
-                                        <rect key="frame" x="550.5" y="31.5" width="38" height="30"/>
+                                        <rect key="frame" x="551" y="32" width="38" height="30"/>
                                         <state key="normal" title="down"/>
                                         <connections>
                                             <action selector="downOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="SsP-PH-4K6"/>
@@ -207,13 +210,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-9p-91g" userLabel="OctaveValue">
-                                        <rect key="frame" x="515" y="36" width="10.5" height="21"/>
+                                        <rect key="frame" x="515" y="36" width="11" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="0.34509803921568627" green="0.36078431372549019" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="FoK-0K-hHD" firstAttribute="centerX" secondItem="iPi-Ia-3SN" secondAttribute="centerX" constant="-2" id="8IX-au-PNS"/>
                                     <constraint firstItem="0il-S8-nLk" firstAttribute="centerY" secondItem="YlH-Qq-Vjp" secondAttribute="centerY" id="8yx-E1-U1l"/>
@@ -275,6 +278,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Wz-l8-YUW" userLabel="DK B Maker">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.98431372549019602" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.96470588235294119" green="0.98431372549019602" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Zdc-ww-dbO"/>

@@ -36,8 +36,8 @@ class ViewController: UIViewController {
         self.blocks = self.updateBlocks(self.beatGrid)
         
         line.path = UIBezierPath(roundedRect: CGRect(x: 0 , y: 5, width: 1, height: self.view.frame.size.height), cornerRadius: 0).CGPath
-        line.backgroundColor = UIColor.yellowColor().CGColor
-        line.strokeColor = UIColor.whiteColor().CGColor
+        line.backgroundColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
+        line.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
         line.lineWidth = 1.0
         self.animationView.layer.addSublayer(line)
         
@@ -68,23 +68,21 @@ class ViewController: UIViewController {
                     self.midiNotesHighlighted.append(blocks[i])
                 }
                 blocks[i].isSelected = !blocks[i].isSelected
-                blocks[i].noteColor = blocks[i].isSelected ? UIColor.greenColor().CGColor : UIColor.blackColor().CGColor
+                blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).CGColor : UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
                 
                 
                 
                 let layer = CAShapeLayer()
-                //                let block = blocks[i]
                 layer.path = UIBezierPath(roundedRect: blocks[i].rect, cornerRadius: 0).CGPath
                 layer.fillColor = blocks[i].noteColor
                 layer.lineWidth = 1.0
-                layer.strokeColor = UIColor.redColor().CGColor
+                layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
                 self.notesView.layer.addSublayer(layer)
                 
                 break
             }
         }
         self.conductor.generateNewMelodicSequence(self.midiNotesHighlighted)
-//                self.conductor.generateDrumSequence(self.midiNotesHighlighted)
         view.setNeedsLayout()
     }
     
@@ -109,9 +107,9 @@ class ViewController: UIViewController {
                 let rect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),(CGFloat(col)*CGFloat(blockHight)),blockWidth,blockHight)
                 let layer = CAShapeLayer()
                 layer.path = UIBezierPath(roundedRect: rect, cornerRadius: 0).CGPath
-                layer.fillColor = UIColor.blackColor().CGColor
+                layer.fillColor = UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
                 layer.lineWidth = 1.0
-                layer.strokeColor = UIColor.redColor().CGColor
+                layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
                 gridLayer.addSublayer(layer)
                 
             }
@@ -172,7 +170,7 @@ class ViewController: UIViewController {
         for row in 0..<Int(noBlocks){
             for col in 0..<noOfNotesInAnOctave {
                 let rect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),(CGFloat(col)*CGFloat(blockHight)),blockWidth,blockHight)
-                let block = SeqMidiNote(rect: rect, noteColor: UIColor.blackColor().CGColor, noteValue: col, notePosition: Float(row)/noBlocks)
+                let block = SeqMidiNote(rect: rect, noteColor: UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor, noteValue: col, notePosition: Float(row)/noBlocks)
                 self.blocks.append(block)
             }
         }
