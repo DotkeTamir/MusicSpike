@@ -29,8 +29,8 @@ class Conductor {
         fmOscillator.modulationIndex = 0.3
         fmOscillator.releaseDuration = 0.01
         fmOscillator.attackDuration = 0
-        fmOscillator.decayDuration = 0.01
-        fmOscillator.sustainLevel = 0.1
+        fmOscillator.decayDuration = 1.01
+        fmOscillator.sustainLevel = 1.1
         
         melodicSound = AKMIDINode(node: fmOscillator)
         melodicSound?.enableMIDI(midi.client, name: "melodicSound midi in")

@@ -192,4 +192,9 @@ class ViewController: UIViewController {
     @IBAction func synthTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("synthSegue", sender: self)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+         let synthVC = segue.destinationViewController as! SynthViewController
+            synthVC.configureWithConductor(self.conductor)
+    }
 }
