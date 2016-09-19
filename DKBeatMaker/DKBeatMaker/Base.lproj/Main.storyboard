@@ -186,10 +186,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yt-WQ-SQw" userLabel="OctavUp">
                                         <rect key="frame" x="464" y="32" width="30" height="30"/>
                                         <state key="normal" title="up"/>
+                                        <connections>
+                                            <action selector="upOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="Wmc-ZF-Ecb"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM2-hB-O3L" userLabel="OctavDown">
                                         <rect key="frame" x="550.5" y="31.5" width="38" height="30"/>
                                         <state key="normal" title="down"/>
+                                        <connections>
+                                            <action selector="downOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="SsP-PH-4K6"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Octave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R5-pD-ctx" userLabel="OctaveLabel">
                                         <rect key="frame" x="480" y="10" width="80" height="21"/>
@@ -253,6 +259,7 @@
                     <connections>
                         <outlet property="attackSlider" destination="cRw-CW-geF" id="nPg-oL-Hom"/>
                         <outlet property="decaySlider" destination="JMP-bD-ms1" id="9Zs-3B-pjO"/>
+                        <outlet property="octaveValueLabel" destination="Qpg-9p-91g" id="4Bt-U3-iYl"/>
                         <outlet property="releaseSlider" destination="0il-S8-nLk" id="QD9-vR-71y"/>
                         <outlet property="sastainSlider" destination="JMP-bD-ms1" id="Dg6-33-Mdm"/>
                     </connections>

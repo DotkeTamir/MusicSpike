@@ -32,10 +32,25 @@ class SynthViewController : UIViewController {
         let slider = sender as! UISlider
         self.conductor.fmOscillator.releaseDuration = Double(slider.value)
     }
+    
     @IBAction func decaySliderChanged(sender: AnyObject) {
         let slider = sender as! UISlider
         self.conductor.fmOscillator.decayDuration = Double(slider.value)
     }
+    
+    @IBAction func upOctaveTapped(sender: AnyObject) {
+        self.conductor.octave = self.conductor.octave + 12
+        self.octaveValueLabel.text = String(self.conductor.octave/12)
+        self.conductor.generateNewMelodicSequence(self.conductor.currentNotes)
+    }
+    
+    @IBAction func downOctaveTapped(sender: AnyObject) {
+        self.conductor.octave = self.conductor.octave - 12
+        self.octaveValueLabel.text = String(self.conductor.octave/12)
+        self.conductor.generateNewMelodicSequence(self.conductor.currentNotes)
+    }
+    
+    @IBOutlet weak var octaveValueLabel: UILabel!
 }
 
 

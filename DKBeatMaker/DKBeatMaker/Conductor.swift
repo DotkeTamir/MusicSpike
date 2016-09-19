@@ -3,6 +3,7 @@ import AudioKit
 class Conductor {
     let midi = AKMIDI()
     
+    var octave = 38
     var fmOscillator = AKFMOscillatorBank()
     var melodicSound: AKMIDINode?
     var verb: AKReverb2?
@@ -18,6 +19,7 @@ class Conductor {
     var pumper: AKCompressor?
     
     var currentTempo = 110.0
+    var currentNotes: Array<SeqMidiNote>!
     
     let scale1: [Int] = [0, 2, 4, 7, 9]
     let scale2: [Int] = [0, 3, 5, 7, 10]
@@ -84,6 +86,7 @@ class Conductor {
         
     }
     func generateNewMelodicSequence(notes: Array<SeqMidiNote>) {
+        self.currentNotes = notes
         sequence.tracks[0].clear()
         sequence.setLength(sequenceLength)
         //        let numberOfSteps = Int(Float(sequenceLength.beats)/stepSize)
@@ -102,7 +105,7 @@ class Conductor {
             print("notes[i].notePosition is \((notes[i].notePosition))")
             print("note value is \((50+notes[i].noteValue))")
             //                let noteToAdd = 60 + scale[Int(scaleOffset)] + octaveOffset
-            sequence.tracks[0].add(noteNumber: 60+notes[i].noteValue,
+            sequence.tracks[0].add(noteNumber: self.octave+notes[i].noteValue,
                                    velocity: 100,
                                    position: AKDuration(beats: Double(notes[i].notePosition)),
                                    duration: AKDuration(beats: 1))
