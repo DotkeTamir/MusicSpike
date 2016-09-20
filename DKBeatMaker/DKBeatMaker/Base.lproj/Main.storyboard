@@ -129,19 +129,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cRw-CW-geF" userLabel="AttackSlider">
-                                        <rect key="frame" x="44" y="5" width="118" height="31"/>
+                                        <rect key="frame" x="44" y="5" width="254" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Ffv-xG-8DE"/>
-                                            <constraint firstAttribute="width" constant="114" id="bn9-Gy-h5D"/>
+                                            <constraint firstAttribute="width" constant="250" id="bn9-Gy-h5D"/>
                                         </constraints>
                                         <connections>
                                             <action selector="attackSliderChanged:" destination="1rV-PN-yUQ" eventType="valueChanged" id="KmQ-AH-ZJf"/>
                                         </connections>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="G40-dS-Rd9" userLabel="DecaySlider">
-                                        <rect key="frame" x="40" y="67" width="118" height="31"/>
+                                        <rect key="frame" x="40" y="67" width="254" height="31"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="114" id="XZe-YI-kN3"/>
+                                            <constraint firstAttribute="width" constant="250" id="XZe-YI-kN3"/>
                                             <constraint firstAttribute="height" constant="30" id="e61-AH-uEq"/>
                                         </constraints>
                                         <connections>
@@ -155,10 +155,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JMP-bD-ms1" userLabel="SastainSlider">
-                                        <rect key="frame" x="39" y="127" width="118" height="31"/>
+                                        <rect key="frame" x="39" y="127" width="254" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Das-zx-erg"/>
-                                            <constraint firstAttribute="width" constant="114" id="Ran-g1-3wf"/>
+                                            <constraint firstAttribute="width" constant="250" id="Ran-g1-3wf"/>
                                         </constraints>
                                         <connections>
                                             <action selector="sastainSLiderChange:" destination="1rV-PN-yUQ" eventType="valueChanged" id="tbm-Ip-vXk"/>
@@ -171,9 +171,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="0il-S8-nLk" userLabel="ReleaseSlider">
-                                        <rect key="frame" x="39" y="188" width="118" height="31"/>
+                                        <rect key="frame" x="39" y="188" width="254" height="31"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="114" id="Hgn-Un-t7y"/>
+                                            <constraint firstAttribute="width" constant="250" id="Hgn-Un-t7y"/>
                                             <constraint firstAttribute="height" constant="30" id="Nqa-gw-0dd"/>
                                         </constraints>
                                         <connections>
@@ -186,35 +186,49 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yt-WQ-SQw" userLabel="OctavUp">
-                                        <rect key="frame" x="464" y="32" width="30" height="30"/>
-                                        <state key="normal" title="up"/>
-                                        <connections>
-                                            <action selector="upOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="Wmc-ZF-Ecb"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM2-hB-O3L" userLabel="OctavDown">
-                                        <rect key="frame" x="551" y="32" width="38" height="30"/>
-                                        <state key="normal" title="down"/>
+                                        <rect key="frame" x="552" y="26.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="YrT-dk-f5r"/>
+                                            <constraint firstAttribute="width" constant="50" id="lSq-Ce-njo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="down">
+                                            <color key="titleColor" red="0.96470588239999999" green="0.98431372549999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="downOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="SsP-PH-4K6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Octave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R5-pD-ctx" userLabel="OctaveLabel">
-                                        <rect key="frame" x="480" y="10" width="80" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Octave" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R5-pD-ctx" userLabel="OctaveLabel">
+                                        <rect key="frame" x="480" y="10" width="80" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="uSB-6e-nh4"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.66666666669999997" green="0.69803921570000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-9p-91g" userLabel="OctaveValue">
-                                        <rect key="frame" x="515" y="36" width="11" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="514.5" y="39" width="12.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.66666666669999997" green="0.69803921570000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yt-WQ-SQw" userLabel="OctavUp">
+                                        <rect key="frame" x="443.5" y="26.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="MYm-gg-RRm"/>
+                                            <constraint firstAttribute="width" constant="50" id="icq-kX-yKQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="up">
+                                            <color key="titleColor" red="0.96470588239999999" green="0.98431372549999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="upOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="Wmc-ZF-Ecb"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.34509803921568627" green="0.36078431372549019" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
