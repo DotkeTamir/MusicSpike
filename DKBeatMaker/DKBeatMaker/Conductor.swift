@@ -5,6 +5,10 @@ class Conductor {
     
     var octave = 38
     var fmOscillator = AKFMOscillatorBank()
+    var vco1: AKMorphingOscillatorBank
+    var vco1Mixer: AKMixer
+    var vco1Sound: AKMIDINode?
+    
     var melodicSound: AKMIDINode?
     var verb: AKReverb2?
     
@@ -25,6 +29,26 @@ class Conductor {
     let sequenceLength = AKDuration(beats: 1.0 ,tempo: 60)
     
     init() {
+        let triangle = AKTable(.Triangle)
+        let square   = AKTable(.Square)
+        let sawtooth = AKTable(.Sawtooth)
+        var squareWithHighPWM = AKTable()
+        let size = squareWithHighPWM.values.count
+        for i in 0..<size {
+            if i < size / 8 {
+                squareWithHighPWM.values[i] = -1.0
+            } else {
+                squareWithHighPWM.values[i] = 1.0
+            }
+        }
+        vco1 = AKMorphingOscillatorBank(waveformArray: [triangle, square, squareWithHighPWM, sawtooth])
+        vco1Mixer   = AKMixer(vco1)
+
+        vco1.releaseDuration = 0.01
+        vco1.attackDuration = 0
+        vco1.decayDuration = 1.01
+        vco1.sustainLevel = 1.1
+        
         sequence = AKSequencer()
         fmOscillator.modulatingMultiplier = 3
         fmOscillator.modulationIndex = 0.3
@@ -35,6 +59,10 @@ class Conductor {
         
         melodicSound = AKMIDINode(node: fmOscillator)
         melodicSound?.enableMIDI(midi.client, name: "melodicSound midi in")
+        
+        vco1Sound = AKMIDINode(node: vco1)
+        vco1Sound?.enableMIDI(midi.client, name: "VOC1 midi in")
+
         verb = AKReverb2(melodicSound!)
         verb?.dryWetMix = 0.0
         verb?.decayTimeAt0Hz = 7
@@ -63,6 +91,7 @@ class Conductor {
         mixer.connect(snareDrum)
         mixer.connect(snareGhost)
         mixer.connect(snareVerb!)
+        mixer.connect(vco1Mixer)
         
         AudioKit.output = pumper
         AudioKit.start()
@@ -72,7 +101,7 @@ class Conductor {
         sequence.tracks[0].setMIDIOutput((melodicSound?.midiIn)!)
         
         sequence.newTrack()
-        sequence.tracks[1].setMIDIOutput(bassDrum.midiIn)
+        sequence.tracks[1].setMIDIOutput((vco1Sound?.midiIn)!                   )
         
         
         sequence.newTrack()
@@ -86,9 +115,14 @@ class Conductor {
     func generateNewMelodicSequence(notes: Array<SeqMidiNote>) {
         self.currentNotes = notes
         sequence.tracks[0].clear()
+        sequence.tracks[1].clear()
         sequence.setLength(sequenceLength)
         for i in 0 ..< notes.count {
-            sequence.tracks[0].add(noteNumber: self.octave+notes[i].noteValue,
+//            sequence.tracks[0].add(noteNumber: self.octave+notes[i].noteValue,
+//                                   velocity: 100,
+//                                   position: AKDuration(beats: Double(notes[i].notePosition)),
+//                                   duration: AKDuration(beats: 1))
+            sequence.tracks[1].add(noteNumber: self.octave+notes[i].noteValue,
                                    velocity: 100,
                                    position: AKDuration(beats: Double(notes[i].notePosition)),
                                    duration: AKDuration(beats: 1))

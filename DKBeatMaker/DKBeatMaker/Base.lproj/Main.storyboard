@@ -186,6 +186,20 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yt-WQ-SQw" userLabel="OctavUp">
+                                        <rect key="frame" x="443.5" y="26.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="MYm-gg-RRm"/>
+                                            <constraint firstAttribute="width" constant="50" id="icq-kX-yKQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="up">
+                                            <color key="titleColor" red="0.96470588239999999" green="0.98431372549999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="upOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="Wmc-ZF-Ecb"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM2-hB-O3L" userLabel="OctavDown">
                                         <rect key="frame" x="552" y="26.5" width="50" height="50"/>
                                         <constraints>
@@ -215,23 +229,24 @@
                                         <color key="textColor" red="0.66666666669999997" green="0.69803921570000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yt-WQ-SQw" userLabel="OctavUp">
-                                        <rect key="frame" x="443.5" y="26.5" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWH-0c-k5n" userLabel="waveform">
+                                        <rect key="frame" x="116" y="271" width="100" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="MYm-gg-RRm"/>
-                                            <constraint firstAttribute="width" constant="50" id="icq-kX-yKQ"/>
+                                            <constraint firstAttribute="width" constant="100" id="2Iy-7h-ZiB"/>
+                                            <constraint firstAttribute="height" constant="40" id="ZrB-mZ-JLt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="up">
-                                            <color key="titleColor" red="0.96470588239999999" green="0.98431372549999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="wave form">
+                                            <color key="titleColor" red="0.66666666669999997" green="0.69803921570000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="upOctaveTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="Wmc-ZF-Ecb"/>
+                                            <action selector="waveformTapped:" destination="1rV-PN-yUQ" eventType="touchUpInside" id="PqF-hD-tCx"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.34509803921568627" green="0.36078431372549019" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="oWH-0c-k5n" firstAttribute="top" secondItem="0il-S8-nLk" secondAttribute="bottom" constant="53" id="5XV-6O-bz1"/>
                                     <constraint firstItem="FoK-0K-hHD" firstAttribute="centerX" secondItem="iPi-Ia-3SN" secondAttribute="centerX" constant="-2" id="8IX-au-PNS"/>
                                     <constraint firstItem="0il-S8-nLk" firstAttribute="centerY" secondItem="YlH-Qq-Vjp" secondAttribute="centerY" id="8yx-E1-U1l"/>
                                     <constraint firstItem="iPi-Ia-3SN" firstAttribute="top" secondItem="zva-ad-14B" secondAttribute="top" constant="10" id="9Wl-0I-my2"/>
@@ -239,6 +254,7 @@
                                     <constraint firstItem="YlH-Qq-Vjp" firstAttribute="top" secondItem="ZqN-Ad-NZd" secondAttribute="bottom" constant="40" id="FFc-Z4-WZ2"/>
                                     <constraint firstItem="Qpg-9p-91g" firstAttribute="centerY" secondItem="8Yt-WQ-SQw" secondAttribute="centerY" id="Gp0-iM-ifg"/>
                                     <constraint firstItem="HM2-hB-O3L" firstAttribute="leading" secondItem="Qpg-9p-91g" secondAttribute="trailing" constant="25" id="Lbh-Lt-MQe"/>
+                                    <constraint firstItem="oWH-0c-k5n" firstAttribute="centerX" secondItem="0il-S8-nLk" secondAttribute="centerX" id="NWb-b6-LAY"/>
                                     <constraint firstItem="JMP-bD-ms1" firstAttribute="centerY" secondItem="ZqN-Ad-NZd" secondAttribute="centerY" id="OXt-gS-PXI"/>
                                     <constraint firstItem="YlH-Qq-Vjp" firstAttribute="centerX" secondItem="ZqN-Ad-NZd" secondAttribute="centerX" id="Oha-cY-eDM"/>
                                     <constraint firstItem="Qpg-9p-91g" firstAttribute="top" secondItem="3R5-pD-ctx" secondAttribute="bottom" constant="5" id="PCx-BA-ZBk"/>
@@ -279,6 +295,7 @@
                         <outlet property="octaveValueLabel" destination="Qpg-9p-91g" id="4Bt-U3-iYl"/>
                         <outlet property="releaseSlider" destination="0il-S8-nLk" id="QD9-vR-71y"/>
                         <outlet property="sastainSlider" destination="JMP-bD-ms1" id="Dg6-33-Mdm"/>
+                        <outlet property="waveformButton" destination="oWH-0c-k5n" id="pzf-nh-yeU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmb-TC-Wz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
