@@ -8,19 +8,19 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
     var cellAttrsDictionary = Dictionary<NSIndexPath, UICollectionViewLayoutAttributes>()
     var contentSize = CGSize.zero
     var dataSourceDidUpdate = true
-
+    
     override func collectionViewContentSize() -> CGSize {
         return self.contentSize
     }
-
+    
     override func prepareLayout() {
-        
+        self.collectionView?.alwaysBounceHorizontal = false
+        self.collectionView?.alwaysBounceVertical = false
         // Only update header cells.
         if !dataSourceDidUpdate {
-            
             // Determine current content offsets.
             let xOffset = collectionView!.contentOffset.x
-            let yOffset = collectionView!.contentOffset.y
+//            let yOffset = collectionView!.contentOffset.y
             
             if collectionView?.numberOfSections() > 0 {
                 for section in 0...collectionView!.numberOfSections()-1 {
@@ -29,40 +29,17 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
                     if collectionView?.numberOfItemsInSection(section) > 0 {
                         
                         // Update all items in the first row.
-                        if section == 0 {
-                            for item in 0...collectionView!.numberOfItemsInSection(section)-1 {
-                                
-                                // Build indexPath to get attributes from dictionary.
-                                let indexPath = NSIndexPath(forItem: item, inSection: section)
-                                
-                                // Update y-position to follow user.
-                                if let attrs = cellAttrsDictionary[indexPath] {
-                                    var frame = attrs.frame
-                                    
-                                    // Also update x-position for corner cell.
-                                    if item == 0 {
-                                        frame.origin.x = xOffset
-                                    }
-                                    
-                                    frame.origin.y = yOffset
-                                    attrs.frame = frame
-                                }
-                                
-                            }
+                        
+                        
+                        // Build indexPath to get attributes from dictionary.
+                        let indexPath = NSIndexPath(forItem: 0, inSection: section)
+                        
+                        // Update y-position to follow user.
+                        if let attrs = cellAttrsDictionary[indexPath] {
+                            var frame = attrs.frame
+                            frame.origin.x = xOffset
+                            attrs.frame = frame
                             
-                            // For all other sections, we only need to update
-                            // the x-position for the fist item.
-                        } else {
-                            
-                            // Build indexPath to get attributes from dictionary.
-                            let indexPath = NSIndexPath(forItem: 0, inSection: section)
-                            
-                            // Update y-position to follow user.
-                            if let attrs = cellAttrsDictionary[indexPath] {
-                                var frame = attrs.frame
-                                frame.origin.x = xOffset
-                                attrs.frame = frame
-                            }
                             
                         } // else
                     } // num of items in section > 0
@@ -88,11 +65,19 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
                         
                         // Build the UICollectionVieLayoutAttributes for the cell.
                         let cellIndex = NSIndexPath(forItem: item, inSection: section)
-                        let xPos = Double(item) * cellWidth
+                        var calculatedCellWidth: Double
+                        var xPos: Double
+                        if section % 2 == 0 && section != 0 && item != 0 {
+                            calculatedCellWidth = self.cellWidth * 2
+                            xPos = Double(item) * calculatedCellWidth - self.cellWidth
+                        }else {
+                            calculatedCellWidth = self.cellWidth
+                            xPos = Double(item) * calculatedCellWidth
+                        }
                         let yPos = Double(section) * cellHeight
                         
                         let cellAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: cellIndex)
-                        cellAttributes.frame = CGRect(x: xPos, y: yPos, width: cellWidth, height: cellHeight)
+                        cellAttributes.frame = CGRect(x: xPos, y: yPos, width: calculatedCellWidth, height: cellHeight)
                         
                         // Determine zIndex based on cell type.
                         if section == 0 && item == 0 {
@@ -120,7 +105,7 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
         self.contentSize = CGSize(width: contentWidth, height: contentHeight)
         
     }
-
+    
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         // Create an array to hold all elements found in our current view.
@@ -144,5 +129,5 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
         return true
     }
-
+    
 }
