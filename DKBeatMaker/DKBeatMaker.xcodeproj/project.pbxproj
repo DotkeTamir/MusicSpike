@@ -19,6 +19,9 @@
 		32A42E741D6525630021B94E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A42E721D6525630021B94E /* LaunchScreen.storyboard */; };
 		32A42E7F1D6525630021B94E /* DKBeatMakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E7E1D6525630021B94E /* DKBeatMakerTests.swift */; };
 		32A42E8A1D6525630021B94E /* DKBeatMakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E891D6525630021B94E /* DKBeatMakerUITests.swift */; };
+		32F15CC81D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */; };
+		32F15CCA1D99B99E00148226 /* MidiClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */; };
+		32F15CCD1D99B9F900148226 /* ArrangementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		32A42E851D6525630021B94E /* DKBeatMakerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKBeatMakerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A42E891D6525630021B94E /* DKBeatMakerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKBeatMakerUITests.swift; sourceTree = "<group>"; };
 		32A42E8B1D6525630021B94E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDirectionalCollectionViewLayout.swift; sourceTree = "<group>"; };
+		32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidiClipCollectionViewCell.swift; path = ArrangementView/MidiClipCollectionViewCell.swift; sourceTree = "<group>"; };
+		32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrangementViewController.swift; path = ArrangementView/ArrangementViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 		32A42E681D6525630021B94E /* DKBeatMaker */ = {
 			isa = PBXGroup;
 			children = (
+				32F15CCB1D99B9C000148226 /* ArrangementView */,
 				32A42E691D6525630021B94E /* AppDelegate.swift */,
 				32A42E6B1D6525630021B94E /* ViewController.swift */,
 				32A42E6D1D6525630021B94E /* Main.storyboard */,
@@ -131,6 +138,7 @@
 				3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */,
 				3275A9451D6CF80B00FA80D3 /* Conductor.swift */,
 				3275D7811D6E4845006CEF3E /* SynthViewController.swift */,
+				32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */,
 			);
 			path = DKBeatMaker;
 			sourceTree = "<group>";
@@ -151,6 +159,15 @@
 				32A42E8B1D6525630021B94E /* Info.plist */,
 			);
 			path = DKBeatMakerUITests;
+			sourceTree = "<group>";
+		};
+		32F15CCB1D99B9C000148226 /* ArrangementView */ = {
+			isa = PBXGroup;
+			children = (
+				32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */,
+				32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */,
+			);
+			name = ArrangementView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,8 +308,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3275D7821D6E4845006CEF3E /* SynthViewController.swift in Sources */,
+				32F15CCA1D99B99E00148226 /* MidiClipCollectionViewCell.swift in Sources */,
 				32A42E6C1D6525630021B94E /* ViewController.swift in Sources */,
 				32A42E6A1D6525630021B94E /* AppDelegate.swift in Sources */,
+				32F15CC81D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift in Sources */,
+				32F15CCD1D99B9F900148226 /* ArrangementViewController.swift in Sources */,
 				3275A9441D6CF79500FA80D3 /* SeqMidiNote.swift in Sources */,
 				3275A9461D6CF80B00FA80D3 /* Conductor.swift in Sources */,
 			);
