@@ -1,8 +1,8 @@
 import UIKit
 
 class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
-    let cellHeight = 30.0
-    let cellWidth = 100.0
+    let cellHeight = 60.0
+    let cellWidth = 150.0
     let STATUS_BAR = UIApplication.sharedApplication().statusBarFrame.height
     
     var cellAttrsDictionary = Dictionary<NSIndexPath, UICollectionViewLayoutAttributes>()

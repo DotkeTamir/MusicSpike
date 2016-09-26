@@ -101,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289" y="-85"/>
+            <point key="canvasLocation" x="409" y="627"/>
         </scene>
         <!--Synth View Controller-->
         <scene sceneID="EmU-f4-a2h">
@@ -316,12 +316,62 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Zdc-ww-dbO"/>
+                        <segue destination="yuT-ge-6Ts" kind="relationship" relationship="rootViewController" id="dFT-In-E7I"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xp7-JB-SYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-416" y="-57"/>
+            <point key="canvasLocation" x="-986" y="-117"/>
+        </scene>
+        <!--Arrangement View Controller-->
+        <scene sceneID="dAV-SE-6sO">
+            <objects>
+                <collectionViewController id="yuT-ge-6Ts" customClass="ArrangementViewController" customModule="DKBeatMaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LKG-4u-Hq7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.34509803919999998" green="0.36078431370000003" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewLayout key="collectionViewLayout" id="ODt-rI-prW" customClass="MultiDirectionalCollectionViewLayout" customModule="DKBeatMaker" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MidiClipCell" id="0sG-WT-aZp" customClass="MidiClipCollectionViewCell" customModule="DKBeatMaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ag-rD-tw4">
+                                            <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="9ag-rD-tw4" firstAttribute="centerX" secondItem="0sG-WT-aZp" secondAttribute="centerX" id="5oN-Go-KCP"/>
+                                    <constraint firstItem="9ag-rD-tw4" firstAttribute="centerY" secondItem="0sG-WT-aZp" secondAttribute="centerY" id="mqP-Uf-UUE"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="label" destination="9ag-rD-tw4" id="NMc-an-sJs"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="yuT-ge-6Ts" id="E6E-4T-NXq"/>
+                            <outlet property="delegate" destination="yuT-ge-6Ts" id="jWe-go-Mys"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="6DR-ey-xH5"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="SeqSegue" id="TGW-56-Qhy"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tuT-KC-zrp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-318" y="-90"/>
         </scene>
     </scenes>
 </document>

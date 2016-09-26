@@ -2,7 +2,7 @@ import UIKit
 
 let reuseIdentifier = "MidiClipCell"
 
-class CustomCollectionViewController: UICollectionViewController {
+class ArrangementViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,13 +17,18 @@ class CustomCollectionViewController: UICollectionViewController {
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         //#warning Incomplete method implementation -- Return the number of sections
-        return 50
+        return 10
     }
     
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        return 20
+        if(section==0){
+            return 15;
+        }else if(section == 1){
+            return 15;
+        }
+        return 10
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -37,6 +42,9 @@ class CustomCollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDelegate
     
-    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("SeqSegue", sender: self)
+
+    }
     
 }
