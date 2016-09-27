@@ -54,18 +54,18 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
         
         // Acknowledge data source change, and disable for next time.
         dataSourceDidUpdate = false
-        
+        var widthOfItems = Double(0)
         // Cycle through each section of the data source.
         if collectionView?.numberOfSections() > 0 {
             for section in 0...collectionView!.numberOfSections()-1 {
                 
                 // Cycle through each item in the section.
                 if collectionView?.numberOfItemsInSection(section) > 0 {
+                    var calculatedCellWidth = Double(0)
                     for item in 0...collectionView!.numberOfItemsInSection(section)-1 {
                         
                         // Build the UICollectionVieLayoutAttributes for the cell.
                         let cellIndex = NSIndexPath(forItem: item, inSection: section)
-                        var calculatedCellWidth: Double
                         var xPos: Double
                         if section % 2 == 0 && section != 0 && item != 0 {
                             calculatedCellWidth = self.cellWidth * 2
@@ -94,13 +94,18 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
                         cellAttrsDictionary[cellIndex] = cellAttributes
                         
                     }
+                    let currentWidth = Double(collectionView!.numberOfItemsInSection(section)) * calculatedCellWidth
+                    if !(widthOfItems > currentWidth) {
+                        widthOfItems = currentWidth
+                    }
+
                 }
                 
             }
         }
         
         // Update content size.
-        let contentWidth = Double(collectionView!.numberOfItemsInSection(0)) * cellWidth
+        let contentWidth = widthOfItems
         let contentHeight = Double(collectionView!.numberOfSections()) * cellHeight
         self.contentSize = CGSize(width: contentWidth, height: contentHeight)
         
