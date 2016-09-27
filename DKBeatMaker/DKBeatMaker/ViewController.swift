@@ -4,23 +4,22 @@ import AudioKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var synthTapped: UIBarButtonItem!
-    
     @IBOutlet weak var pauseTapped: UIBarButtonItem!
     @IBOutlet weak var playTapped: UIBarButtonItem!
     
     // grid object
-    let line = CAShapeLayer()
+    let line: CAShapeLayer = CAShapeLayer()
     var blocks: Array<SeqMidiNote> = Array<SeqMidiNote>()
-    var gridDictionary = [String: CALayer]()
+    var gridDictionary: [String:CALayer] = [String:CALayer]()
     
-    var beatGrid : Float = (1/4)
-    var noOfBars  = 1
-    let noOfNotesInAnOctave = 12
+    var beatGrid: Float = (1.0/4.0)
+    var noOfBars: Float  = 1.0
+    let noOfNotesInAnOctave: Int = 12
     
     var midiNotesHighlighted: Array<SeqMidiNote> = Array<SeqMidiNote>()
-    var midi  = AKMIDI()
-    let conductor = Conductor()
-    let lineAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+    var midi: AKMIDI = AKMIDI()
+    let conductor: Conductor = Conductor()
+    let lineAnimation: CABasicAnimation = CABasicAnimation(keyPath: "transform.translation.x")
     
     @IBOutlet weak var notesView: UIView!
     @IBOutlet weak var gridVIew: UIView!
@@ -35,13 +34,12 @@ class ViewController: UIViewController {
         self.gridVIew.layer.addSublayer(self.gridDictionary["1/4"]!)
         self.blocks = self.updateBlocks(self.beatGrid)
         
-        line.path = UIBezierPath(roundedRect: CGRect(x: 0 , y: 5, width: 1, height: self.view.frame.size.height), cornerRadius: 0).CGPath
-        line.backgroundColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
-        line.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
+        line.path = UIBezierPath(roundedRect: CGRect(x: 0 , y: 5, width: 1, height: self.view.frame.size.height),
+                                 cornerRadius: 0).CGPath
+        line.backgroundColor = UIColor(red: 0.61, green: 0.62, blue: 0.68, alpha: 1.0).CGColor
+        line.strokeColor = UIColor(red: 0.61, green: 0.62, blue: 0.68, alpha: 1.0).CGColor
         line.lineWidth = 1.0
         self.animationView.layer.addSublayer(line)
-        
-        
         
 //        fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
         self.lineAnimation.fromValue = 1.0
@@ -57,22 +55,20 @@ class ViewController: UIViewController {
     }
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
-        let tappedPoint = gestureRecognizer.locationInView(self.gridVIew)
+        let tappedPoint: CGPoint = gestureRecognizer.locationInView(self.gridVIew)
         
-        for i in 0..<self.blocks.count {
+        for i: Int in 0..<self.blocks.count {
             if(CGRectContainsPoint(blocks[i].rect, tappedPoint)){
-                
                 if self.blocks[i].isSelected {
                     self.removeMidiNote(blocks[i])
                 } else {
                     self.midiNotesHighlighted.append(blocks[i])
                 }
                 blocks[i].isSelected = !blocks[i].isSelected
-                blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).CGColor : UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
+                blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).CGColor :
+                                                             UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
                 
-                
-                
-                let layer = CAShapeLayer()
+                let layer:CAShapeLayer = CAShapeLayer()
                 layer.path = UIBezierPath(roundedRect: blocks[i].rect, cornerRadius: 0).CGPath
                 layer.fillColor = blocks[i].noteColor
                 layer.lineWidth = 1.0
@@ -87,7 +83,7 @@ class ViewController: UIViewController {
     }
     
     func removeMidiNote(midiNote: SeqMidiNote) {
-        for i in 0..<self.midiNotesHighlighted.count {
+        for i: Int in 0..<self.midiNotesHighlighted.count {
             if CGRectContainsPoint(midiNote.rect, self.midiNotesHighlighted[i].rect.origin){
                 self.midiNotesHighlighted.removeAtIndex(i)
                 break
@@ -96,14 +92,13 @@ class ViewController: UIViewController {
     }
     
     func createGridLayer(grid: Float) -> CALayer {
+        let gridLayer: CAShapeLayer = CAShapeLayer()
+        let noBlocks: Float = self.noOfBars / grid
+        let blockHight: CGFloat = self.view.bounds.size.height / CGFloat(noOfNotesInAnOctave)
+        let blockWidth: CGFloat = self.view.bounds.size.width / CGFloat(noBlocks)
         
-        let gridLayer = CAShapeLayer()
-        let noBlocks = Float(self.noOfBars) / grid
-        let blockHight = self.view.bounds.size.height / CGFloat( noOfNotesInAnOctave)
-        let blockWidth = self.view.bounds.size.width / CGFloat( noBlocks)
-        
-        for row in 0..<Int(noBlocks){
-            for col in 0..<noOfNotesInAnOctave {
+        for row: Int in 0..<Int(noBlocks){
+            for col: Int in 0..<noOfNotesInAnOctave {
                 let rect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),(CGFloat(col)*CGFloat(blockHight)),blockWidth,blockHight)
                 let layer = CAShapeLayer()
                 layer.path = UIBezierPath(roundedRect: rect, cornerRadius: 0).CGPath
@@ -111,15 +106,13 @@ class ViewController: UIViewController {
                 layer.lineWidth = 1.0
                 layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
                 gridLayer.addSublayer(layer)
-                
             }
         }
         return gridLayer
     }
     
-    
-    func shouldAddNote(origiin: CGPoint) ->  SeqMidiNote? {
-        for i in 0..<self.blocks.count{
+    func shouldAddNote(origiin: CGPoint) -> SeqMidiNote? {
+        for i: Int in 0..<self.blocks.count{
             if(CGPointEqualToPoint(origiin, blocks[i].rect.origin)){
                 return self.blocks[i]
             }
@@ -132,9 +125,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func gridChangeTapped(sender: AnyObject) {
-        self.beatGrid /= 2;
+        self.beatGrid /= 2.0;
         
-        if(self.beatGrid == 1/32){
+        if(self.beatGrid == 1/32) {
             self.beatGrid = 1/4
         }
         self.gridVIew.layer.sublayers?.removeAll()
@@ -163,14 +156,20 @@ class ViewController: UIViewController {
     
     func updateBlocks(breaGrid: Float) -> Array<SeqMidiNote> {
         self.blocks.removeAll()
-        let noBlocks = Float(self.noOfBars) / beatGrid
-        let blockHight = self.view.bounds.size.height / CGFloat( noOfNotesInAnOctave)
-        let blockWidth = self.view.bounds.size.width / CGFloat( noBlocks)
+        let noBlocks: Float = self.noOfBars / beatGrid
+        let blockHight: CGFloat = self.view.bounds.size.height / CGFloat( noOfNotesInAnOctave)
+        let blockWidth: CGFloat = self.view.bounds.size.width / CGFloat( noBlocks)
         
-        for row in 0..<Int(noBlocks){
-            for col in 0..<noOfNotesInAnOctave {
-                let rect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),(CGFloat(col)*CGFloat(blockHight)),blockWidth,blockHight)
-                let block = SeqMidiNote(rect: rect, noteColor: UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor, noteValue: col, notePosition: Float(row)/noBlocks)
+        for row: Int in 0..<Int(noBlocks){
+            for col: Int in 0..<noOfNotesInAnOctave {
+                let rect: CGRect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),
+                                              (CGFloat(col) * CGFloat(blockHight)),
+                                              blockWidth,
+                                              blockHight)
+                let block: SeqMidiNote = SeqMidiNote(rect: rect,
+                                                     noteColor: UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor,
+                                                     noteValue: col,
+                                                     notePosition: Float(row)/noBlocks)
                 self.blocks.append(block)
             }
         }
