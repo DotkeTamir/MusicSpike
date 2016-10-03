@@ -1,10 +1,10 @@
 import AudioKit
 
 class Conductor {
-    let midi = AKMIDI()
+    let midi: AKMIDI = AKMIDI()
     
-    var octave = 38
-    var fmOscillator = AKFMOscillatorBank()
+    var octave: Int = 38
+    var fmOscillator: AKFMOscillatorBank = AKFMOscillatorBank()
     var vco1: AKMorphingOscillatorBank
     var vco1Mixer: AKMixer
     var vco1Sound: AKMIDINode?
@@ -12,14 +12,14 @@ class Conductor {
     var melodicSound: AKMIDINode?
     var verb: AKReverb2?
     
-    var bassDrum = AKSynthKick()
-    var snareDrum = AKSynthSnare()
-    var snareGhost = AKSynthSnare(duration: 0.06, resonance: 0.3)
-    var snareMixer = AKMixer()
+    var bassDrum: AKSynthKick = AKSynthKick()
+    var snareDrum: AKSynthSnare = AKSynthSnare()
+    var snareGhost: AKSynthSnare = AKSynthSnare(duration: 0.06, resonance: 0.3)
+    var snareMixer: AKMixer = AKMixer()
     var snareVerb: AKReverb?
     
-    var sequence : AKSequencer
-    var mixer = AKMixer()
+    var sequence: AKSequencer
+    var mixer: AKMixer = AKMixer()
     var pumper: AKCompressor?
     
     var currentNotes: Array<SeqMidiNote>!
@@ -29,20 +29,20 @@ class Conductor {
     let sequenceLength = AKDuration(beats: 1.0 ,tempo: 60)
     
     init() {
-        let triangle = AKTable(.Triangle)
-        let square   = AKTable(.Square)
-        let sawtooth = AKTable(.Sawtooth)
-        var squareWithHighPWM = AKTable()
-        let size = squareWithHighPWM.values.count
-        for i in 0..<size {
-            if i < size / 8 {
+        let triangle: AKTable = AKTable(.Triangle)
+        let square: AKTable   = AKTable(.Square)
+        let sawtooth: AKTable = AKTable(.Sawtooth)
+        var squareWithHighPWM: AKTable = AKTable()
+        let size: Int = squareWithHighPWM.values.count
+        for i: Int in 0..<size {
+            if Float(i) < Float(size) / 8.0 {
                 squareWithHighPWM.values[i] = -1.0
             } else {
                 squareWithHighPWM.values[i] = 1.0
             }
         }
         vco1 = AKMorphingOscillatorBank(waveformArray: [triangle, square, squareWithHighPWM, sawtooth])
-        vco1Mixer   = AKMixer(vco1)
+        vco1Mixer = AKMixer(vco1)
 
         vco1.releaseDuration = 0.01
         vco1.attackDuration = 0
@@ -109,20 +109,15 @@ class Conductor {
         
         sequence.enableLooping()
         sequence.setTempo(30)
-        
-        
     }
+    
     func generateNewMelodicSequence(notes: Array<SeqMidiNote>) {
         self.currentNotes = notes
         sequence.tracks[0].clear()
         sequence.tracks[1].clear()
         sequence.setLength(sequenceLength)
-        for i in 0 ..< notes.count {
-//            sequence.tracks[0].add(noteNumber: self.octave+notes[i].noteValue,
-//                                   velocity: 100,
-//                                   position: AKDuration(beats: Double(notes[i].notePosition)),
-//                                   duration: AKDuration(beats: 1))
-            sequence.tracks[1].add(noteNumber: self.octave+notes[i].noteValue,
+        for i: Int in 0 ..< notes.count {
+            sequence.tracks[1].add(noteNumber: self.octave + notes[i].noteValue,
                                    velocity: 100,
                                    position: AKDuration(beats: Double(notes[i].notePosition)),
                                    duration: AKDuration(beats: 1))
@@ -131,7 +126,6 @@ class Conductor {
     }
     
     func generateDrumSequence(notes: Array<SeqMidiNote>) {
-        
         sequence.tracks[1].clear()
         for i in 0 ..< notes.count {
             sequence.tracks[1].add(noteNumber: 60,
@@ -143,7 +137,7 @@ class Conductor {
     }
     
     func randomBool() -> Bool {
-        return arc4random_uniform(2) == 0 ? true : false
+        return arc4random_uniform(2) == 0
     }
     
     func generateSequence() {
@@ -155,11 +149,9 @@ class Conductor {
     }
 
     func startPlaying() {
-             sequence.play()
+        sequence.play()
     }
     func stopPlaying() {
         sequence.stop()
     }
-
-    
 }

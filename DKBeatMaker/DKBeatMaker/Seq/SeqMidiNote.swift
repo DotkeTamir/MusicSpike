@@ -4,9 +4,9 @@ import UIKit
 /// represent the ui object of a midi note in the sequencer
 class SeqMidiNote: NSObject {
     
-    var rect :CGRect
-    var noteColor : CGColor
-    var isSelected : Bool = false
+    var rect: CGRect
+    var noteColor: CGColor
+    var isSelected: Bool = false
     
     let noteValue: Int
     let notePosition: Float
@@ -16,6 +16,5 @@ class SeqMidiNote: NSObject {
         self.noteColor = noteColor
         self.notePosition = notePosition == 0 ? 0.001 : notePosition
         self.noteValue = noteValue
-        
     }
 }
