@@ -24,18 +24,10 @@ class ArrangementViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        if arrPresenter?.sections.count == 0 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AddTrackCell", forIndexPath: indexPath)
-            cell.backgroundColor = UIColor.redColor()
-            return cell
-        }else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
         
             cell.label.text = "Sec \(indexPath.section)/Item \(indexPath.item)"
             return cell
-        }
-
     }
     
     // MARK: UICollectionViewDelegate
