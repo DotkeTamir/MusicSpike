@@ -16,43 +16,27 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
     override func prepareLayout() {
         self.collectionView?.alwaysBounceHorizontal = false
         self.collectionView?.alwaysBounceVertical = false
-        // Only update header cells.
         if !dataSourceDidUpdate {
-            // Determine current content offsets.
             let xOffset = collectionView!.contentOffset.x
-//            let yOffset = collectionView!.contentOffset.y
-            
             if collectionView?.numberOfSections() > 0 {
                 for section in 0...collectionView!.numberOfSections()-1 {
                     
-                    // Confirm the section has items.
                     if collectionView?.numberOfItemsInSection(section) > 0 {
-                        
-                        // Update all items in the first row.
-                        
-                        
-                        // Build indexPath to get attributes from dictionary.
                         let indexPath = NSIndexPath(forItem: 0, inSection: section)
-                        
-                        // Update y-position to follow user.
                         if let attrs = cellAttrsDictionary[indexPath] {
                             var frame = attrs.frame
                             frame.origin.x = xOffset
                             attrs.frame = frame
                             
                             
-                        } // else
-                    } // num of items in section > 0
-                } // sections for loop
-            } // num of sections > 0
+                        }
+                    }
+                }
+            }
             
-            
-            // Do not run attribute generation code
-            // unless data source has been updated.
             return
         }
         
-        // Acknowledge data source change, and disable for next time.
         dataSourceDidUpdate = false
         var widthOfItems = Double(0)
         // Cycle through each section of the data source.

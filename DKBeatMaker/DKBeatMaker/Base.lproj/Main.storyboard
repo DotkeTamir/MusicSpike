@@ -333,8 +333,17 @@
                         <color key="backgroundColor" red="0.34509803919999998" green="0.36078431370000003" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewLayout key="collectionViewLayout" id="ODt-rI-prW" customClass="MultiDirectionalCollectionViewLayout" customModule="DKBeatMaker" customModuleProvider="target"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MidiClipCell" id="0sG-WT-aZp" customClass="MidiClipCollectionViewCell" customModule="DKBeatMaker" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddTrackCell" id="Emp-LY-4Ud" userLabel="AddCell">
                                 <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MidiClipCell" id="0sG-WT-aZp" customClass="MidiClipCollectionViewCell" customModule="DKBeatMaker" customModuleProvider="target">
+                                <rect key="frame" x="61" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
