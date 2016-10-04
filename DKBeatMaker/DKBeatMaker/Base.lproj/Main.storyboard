@@ -334,7 +334,7 @@
                         <collectionViewLayout key="collectionViewLayout" id="ODt-rI-prW" customClass="MultiDirectionalCollectionViewLayout" customModule="DKBeatMaker" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MidiClipCell" id="0sG-WT-aZp" customClass="MidiClipCollectionViewCell" customModule="DKBeatMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <rect key="frame" x="61" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -358,13 +358,51 @@
                                     <outlet property="label" destination="9ag-rD-tw4" id="NMc-an-sJs"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="audioControllerCell" id="tWR-yr-C6u" customClass="AudioControllerCell" customModule="DKBeatMaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qlz-1w-di3" userLabel="Add Clip">
+                                            <rect key="frame" x="18" y="18" width="14" height="14"/>
+                                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" title="Add Clip"/>
+                                            <connections>
+                                                <action selector="addClipTapped:" destination="tWR-yr-C6u" eventType="touchUpInside" id="LAj-cz-bem"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.69803921570000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Qlz-1w-di3" secondAttribute="bottom" constant="10" id="8Ra-9z-ZBt"/>
+                                    <constraint firstItem="Qlz-1w-di3" firstAttribute="top" secondItem="tWR-yr-C6u" secondAttribute="topMargin" constant="10" id="RBa-Rq-jj1"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Qlz-1w-di3" secondAttribute="trailing" constant="10" id="WJ0-dt-gOp"/>
+                                    <constraint firstItem="Qlz-1w-di3" firstAttribute="leading" secondItem="tWR-yr-C6u" secondAttribute="leadingMargin" constant="10" id="lbd-jQ-jm0"/>
+                                </constraints>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="yuT-ge-6Ts" id="E6E-4T-NXq"/>
                             <outlet property="delegate" destination="yuT-ge-6Ts" id="jWe-go-Mys"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="6DR-ey-xH5"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="6DR-ey-xH5">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="play" id="8w5-2F-Lf4"/>
+                            <barButtonItem systemItem="pause" id="tEA-iz-Jdu"/>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1f5-Fz-L6T">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="yuT-ge-6Ts" id="2Qv-Di-1T9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="SeqSegue" id="TGW-56-Qhy"/>
                     </connections>

@@ -1,8 +1,8 @@
 import Foundation
+import UIKit
 
 class ArrangementViewPresenter {
     
-    // @[sectionNumber : NumberOfItemsInSection]
     var sections: NSMutableArray
     init() {
         sections = []
@@ -16,4 +16,23 @@ class ArrangementViewPresenter {
         return section < sections.count ? (sections[section] as! MidiTrack) : nil
     }
     
+    func addButtonTapped() {
+        self.addMidiTrack()
+    }
+    
+    func numberOfItemForSection(section: Int) -> Int {
+        return 30
+        let items: Int = (self.midiTrackForSection(section)?.midiClips.count)!
+        return items
+    }
+    
+//    func cellForItemAtIndexPath (indexPath: NSIndexPath) -> UICollectionViewCell {
+//        if(indexPath.row == 0){
+//            
+//        } else {
+//            collectionView.dequeueReusableCellWithReuseIdentifier(midiClipReuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
+//            
+//
+//        }
+//    }
 }
