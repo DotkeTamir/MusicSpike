@@ -3,18 +3,20 @@ import UIKit
 let midiClipReuseIdentifier: String = "MidiClipCell"
 let audioControllerReuseIdentifier: String = "audioControllerCell"
 
-class ArrangementViewController: UICollectionViewController {
+class ArrangementViewController: UICollectionViewController, AddClipDelegate, ArrangementViewPresenterDelegate{
     var arrangementViewPresenter: ArrangementViewPresenter?
     
+    @IBOutlet weak var multiDirectionalLayout: MultiDirectionalCollectionViewLayout!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.arrangementViewPresenter = ArrangementViewPresenter.init()
+        self.arrangementViewPresenter?.delegate = self
         
     }
     
     // MARK: UICollectionViewDataSource
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 20//(self.arrangementViewPresenter?.sections.count)!
+        return (self.arrangementViewPresenter?.sections.count)!
     }
     
     
@@ -23,17 +25,16 @@ class ArrangementViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        var cell: UICollectionViewCell
         if indexPath.row == 0{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(audioControllerReuseIdentifier, forIndexPath: indexPath) as! AudioControllerCell
             cell.trackNumber = indexPath.section
+            cell.delegate = self
             return cell
         }else{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(midiClipReuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
             cell.label.text = "Sec \(indexPath.section)/Item \(indexPath.item)"
             return cell
         }
-//        return cell
     }
     
     // MARK: UICollectionViewDelegate
@@ -45,5 +46,14 @@ class ArrangementViewController: UICollectionViewController {
     
     @IBAction func addButtonTapped(sender: AnyObject) {
         self.arrangementViewPresenter?.addButtonTapped()
+    }
+    
+    func addClipForTrackNumber(trackNumber: Int) {
+        self.arrangementViewPresenter?.addMidiClip(trackNumber)
+    }
+    
+    func reloadCollectionView() {
+        self.collectionView?.reloadData()
+        self.multiDirectionalLayout.dataSourceDidUpdate = true
     }
 }

@@ -404,6 +404,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="multiDirectionalLayout" destination="ODt-rI-prW" id="6Hr-a3-xwa"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="SeqSegue" id="TGW-56-Qhy"/>
                     </connections>
                 </collectionViewController>

@@ -82,7 +82,7 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewFlowLayout{
                     if !(widthOfItems > currentWidth) {
                         widthOfItems = currentWidth
                     }
-
+                    
                 }
                 
             }

@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         line.lineWidth = 1.0
         self.animationView.layer.addSublayer(line)
         
-//        fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+        //        fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
         self.lineAnimation.fromValue = 1.0
         self.lineAnimation.toValue = self.view.frame.size.width
         self.lineAnimation.duration = 2
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
                 }
                 blocks[i].isSelected = !blocks[i].isSelected
                 blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).CGColor :
-                                                             UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
+                    UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
                 
                 let layer:CAShapeLayer = CAShapeLayer()
                 layer.path = UIBezierPath(roundedRect: blocks[i].rect, cornerRadius: 0).CGPath
@@ -185,13 +185,13 @@ class ViewController: UIViewController {
         line.addAnimation(self.lineAnimation, forKey: "transform.translation.y")
         self.conductor.startPlaying()
     }
-        
+    
     @IBAction func synthTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("synthSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-         let synthVC = segue.destinationViewController as! SynthViewController
-            synthVC.configureWithConductor(self.conductor)
+        let synthVC = segue.destinationViewController as! SynthViewController
+        synthVC.configureWithConductor(self.conductor)
     }
 }

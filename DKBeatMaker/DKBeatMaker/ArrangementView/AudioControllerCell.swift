@@ -4,6 +4,8 @@ import UIKit
 class AudioControllerCell: UICollectionViewCell {
     
     var trackNumber: Int = 1000000
+    var delegate: AddClipDelegate?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
@@ -15,9 +17,10 @@ class AudioControllerCell: UICollectionViewCell {
     }
     
     func setup() {
-    
+        
     }
     
     @IBAction func addClipTapped(sender: AnyObject) {
+        delegate?.addClipForTrackNumber(self.trackNumber)
     }
 }

@@ -4,12 +4,22 @@ import UIKit
 class ArrangementViewPresenter {
     
     var sections: NSMutableArray
+    var delegate: ArrangementViewPresenterDelegate?
     init() {
         sections = []
     }
     
     func addMidiTrack()  {
-        sections.addObject(MidiTrack.init())
+        let track: MidiTrack = MidiTrack.init()
+        track.addAudioController(AudioControllerModel())
+        sections.addObject(track)
+        self.delegate?.reloadCollectionView()
+    }
+    
+    func addMidiClip(trackNumber:Int) {
+        let midiClip : MidiClipModel = MidiClipModel()
+        self.midiTrackForSection(trackNumber)?.addMidiClip(midiClip)
+        self.delegate?.reloadCollectionView()
     }
     
     func midiTrackForSection(section: Int) -> MidiTrack? {
@@ -21,18 +31,17 @@ class ArrangementViewPresenter {
     }
     
     func numberOfItemForSection(section: Int) -> Int {
-        return 30
         let items: Int = (self.midiTrackForSection(section)?.midiClips.count)!
         return items
     }
     
-//    func cellForItemAtIndexPath (indexPath: NSIndexPath) -> UICollectionViewCell {
-//        if(indexPath.row == 0){
-//            
-//        } else {
-//            collectionView.dequeueReusableCellWithReuseIdentifier(midiClipReuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
-//            
-//
-//        }
-//    }
+    //    func cellForItemAtIndexPath (indexPath: NSIndexPath) -> UICollectionViewCell {
+    //        if(indexPath.row == 0){
+    //
+    //        } else {
+    //            collectionView.dequeueReusableCellWithReuseIdentifier(midiClipReuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
+    //
+    //
+    //        }
+    //    }
 }
