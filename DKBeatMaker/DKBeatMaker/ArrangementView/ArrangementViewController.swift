@@ -40,7 +40,9 @@ class ArrangementViewController: UICollectionViewController, AddClipDelegate, Ar
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("SeqSegue", sender: self)
+        if(indexPath.row != 0){
+            self.performSegueWithIdentifier("SeqSegue", sender: self)
+        }
         
     }
     
