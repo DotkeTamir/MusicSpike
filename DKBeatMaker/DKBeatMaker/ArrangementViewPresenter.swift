@@ -3,8 +3,10 @@ import UIKit
 
 class ArrangementViewPresenter {
     
+    // Could and maybe should be moved to a model object, thinking to do that as a second stage.
     var sections: NSMutableArray
     var delegate: ArrangementViewPresenterDelegate?
+    
     init() {
         sections = []
     }
