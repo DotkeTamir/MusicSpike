@@ -136,10 +136,6 @@ class Conductor {
         sequence.setLength(sequenceLength)
     }
     
-    func randomBool() -> Bool {
-        return arc4random_uniform(2) == 0
-    }
-    
     func generateSequence() {
         generateNewMelodicSequence([])
     }
