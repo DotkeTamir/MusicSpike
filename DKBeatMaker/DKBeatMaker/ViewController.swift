@@ -3,10 +3,6 @@ import AudioKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var synthTapped: UIBarButtonItem!
-    @IBOutlet weak var pauseTapped: UIBarButtonItem!
-    @IBOutlet weak var playTapped: UIBarButtonItem!
-    
     // grid object
     let line: CAShapeLayer = CAShapeLayer()
     var blocks: Array<SeqMidiNote> = Array<SeqMidiNote>()
@@ -28,6 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addNavigationItems()
         self.gridDictionary["1/4"] = self.createGridLayer(0.25)
         self.gridDictionary["1/8"] = self.createGridLayer(0.125)
         self.gridDictionary["1/16"] = self.createGridLayer(0.0625)
@@ -52,6 +49,17 @@ class ViewController: UIViewController {
         self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         self.animationView.addGestureRecognizer(gestureRecognizer)
+    }
+
+    func addNavigationItems()  {
+        let playBarButton = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Play , target: self, action: #selector(ViewController.playTapped(_:)))
+        let pauseBarButton = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Pause , target: self, action: #selector(ViewController.pausedTapped(_:)))
+        let synthBarButton = UIBarButtonItem()
+        synthBarButton.title = "Synth"
+        synthBarButton.target = self
+        synthBarButton.action = #selector(ViewController.synthTapped(_:))
+        
+        self.navigationItem.rightBarButtonItems = [synthBarButton,pauseBarButton,playBarButton]
     }
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {

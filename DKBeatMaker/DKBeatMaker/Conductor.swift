@@ -93,7 +93,9 @@ class Conductor {
         mixer.connect(snareVerb!)
         mixer.connect(vco1Mixer)
         
-        AudioKit.output = pumper
+        if (AudioKit.output == nil) {
+            AudioKit.output = pumper
+        }
         AudioKit.start()
         
         sequence.newTrack()
