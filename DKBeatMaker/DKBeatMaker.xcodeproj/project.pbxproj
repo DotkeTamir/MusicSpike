@@ -21,6 +21,11 @@
 		32A42E8A1D6525630021B94E /* DKBeatMakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A42E891D6525630021B94E /* DKBeatMakerUITests.swift */; };
 		32A8E6FF1D9B10BB00C414ED /* ArrangementViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8E6FE1D9B10BB00C414ED /* ArrangementViewPresenter.swift */; };
 		32A8E7011D9B128A00C414ED /* MidiTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8E7001D9B128A00C414ED /* MidiTrack.swift */; };
+		32DB4B911DA43DE400CB055C /* AudioControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB4B901DA43DE400CB055C /* AudioControllerCell.swift */; };
+		32DB4B931DA444A300CB055C /* AddClipDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB4B921DA444A300CB055C /* AddClipDelegate.swift */; };
+		32DB4B951DA44D3800CB055C /* ArrangementViewSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB4B941DA44D3800CB055C /* ArrangementViewSurface.swift */; };
+		32DB4B981DA44EC600CB055C /* MidiClipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB4B971DA44EC600CB055C /* MidiClipModel.swift */; };
+		32DB4B9B1DA44FA200CB055C /* AudioControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB4B9A1DA44FA200CB055C /* AudioControllerModel.swift */; };
 		32F15CC81D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */; };
 		32F15CCA1D99B99E00148226 /* MidiClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */; };
 		32F15CCD1D99B9F900148226 /* ArrangementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */; };
@@ -77,6 +82,11 @@
 		32A42E8B1D6525630021B94E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A8E6FE1D9B10BB00C414ED /* ArrangementViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrangementViewPresenter.swift; sourceTree = "<group>"; };
 		32A8E7001D9B128A00C414ED /* MidiTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidiTrack.swift; path = Tracks/MidiTrack.swift; sourceTree = "<group>"; };
+		32DB4B901DA43DE400CB055C /* AudioControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioControllerCell.swift; path = ArrangementView/AudioControllerCell.swift; sourceTree = "<group>"; };
+		32DB4B921DA444A300CB055C /* AddClipDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClipDelegate.swift; sourceTree = "<group>"; };
+		32DB4B941DA44D3800CB055C /* ArrangementViewSurface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrangementViewSurface.swift; path = ArrangementView/ArrangementViewSurface.swift; sourceTree = "<group>"; };
+		32DB4B971DA44EC600CB055C /* MidiClipModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidiClipModel.swift; path = ArrangementView/MidiClipModel.swift; sourceTree = "<group>"; };
+		32DB4B9A1DA44FA200CB055C /* AudioControllerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioControllerModel.swift; sourceTree = "<group>"; };
 		32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDirectionalCollectionViewLayout.swift; sourceTree = "<group>"; };
 		32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidiClipCollectionViewCell.swift; path = ArrangementView/MidiClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrangementViewController.swift; path = ArrangementView/ArrangementViewController.swift; sourceTree = "<group>"; };
@@ -142,8 +152,6 @@
 				3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */,
 				3275A9451D6CF80B00FA80D3 /* Conductor.swift */,
 				3275D7811D6E4845006CEF3E /* SynthViewController.swift */,
-				32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */,
-				32A8E7001D9B128A00C414ED /* MidiTrack.swift */,
 			);
 			path = DKBeatMaker;
 			sourceTree = "<group>";
@@ -166,12 +174,35 @@
 			path = DKBeatMakerUITests;
 			sourceTree = "<group>";
 		};
+		32DB4B961DA44D4200CB055C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				32DB4B921DA444A300CB055C /* AddClipDelegate.swift */,
+				32DB4B941DA44D3800CB055C /* ArrangementViewSurface.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		32DB4B991DA44F7800CB055C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				32DB4B971DA44EC600CB055C /* MidiClipModel.swift */,
+				32A8E7001D9B128A00C414ED /* MidiTrack.swift */,
+				32DB4B9A1DA44FA200CB055C /* AudioControllerModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		32F15CCB1D99B9C000148226 /* ArrangementView */ = {
 			isa = PBXGroup;
 			children = (
+				32DB4B991DA44F7800CB055C /* Model */,
+				32DB4B961DA44D4200CB055C /* Protocols */,
 				32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */,
+				32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */,
 				32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */,
 				32A8E6FE1D9B10BB00C414ED /* ArrangementViewPresenter.swift */,
+				32DB4B901DA43DE400CB055C /* AudioControllerCell.swift */,
 			);
 			name = ArrangementView;
 			sourceTree = "<group>";
@@ -315,9 +346,14 @@
 			files = (
 				32A8E7011D9B128A00C414ED /* MidiTrack.swift in Sources */,
 				3275D7821D6E4845006CEF3E /* SynthViewController.swift in Sources */,
+				32DB4B981DA44EC600CB055C /* MidiClipModel.swift in Sources */,
+				32DB4B911DA43DE400CB055C /* AudioControllerCell.swift in Sources */,
 				32F15CCA1D99B99E00148226 /* MidiClipCollectionViewCell.swift in Sources */,
+				32DB4B931DA444A300CB055C /* AddClipDelegate.swift in Sources */,
 				32A42E6C1D6525630021B94E /* ViewController.swift in Sources */,
+				32DB4B951DA44D3800CB055C /* ArrangementViewSurface.swift in Sources */,
 				32A42E6A1D6525630021B94E /* AppDelegate.swift in Sources */,
+				32DB4B9B1DA44FA200CB055C /* AudioControllerModel.swift in Sources */,
 				32F15CC81D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift in Sources */,
 				32F15CCD1D99B9F900148226 /* ArrangementViewController.swift in Sources */,
 				32A8E6FF1D9B10BB00C414ED /* ArrangementViewPresenter.swift in Sources */,

@@ -59,14 +59,14 @@ class SynthViewController : UIViewController {
     }
     
     @IBOutlet weak var octaveValueLabel: UILabel!
- 
+    
     @IBAction func waveformTapped(sender: AnyObject) {
         var index = self.conductor.vco1.index
         
         if index > 3 {
             index = 0
         }else {
-        index = index + 1
+            index = index + 1
         }
         self.conductor.vco1.index = index
         self.waveformButton.titleLabel?.text = String(index)

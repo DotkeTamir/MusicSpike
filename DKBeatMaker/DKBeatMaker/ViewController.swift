@@ -3,10 +3,6 @@ import AudioKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var synthTapped: UIBarButtonItem!
-    @IBOutlet weak var pauseTapped: UIBarButtonItem!
-    @IBOutlet weak var playTapped: UIBarButtonItem!
-    
     // grid object
     let line: CAShapeLayer = CAShapeLayer()
     var blocks: Array<SeqMidiNote> = Array<SeqMidiNote>()
@@ -28,6 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addNavigationItems()
         self.gridDictionary["1/4"] = self.createGridLayer(0.25)
         self.gridDictionary["1/8"] = self.createGridLayer(0.125)
         self.gridDictionary["1/16"] = self.createGridLayer(0.0625)
@@ -41,7 +38,7 @@ class ViewController: UIViewController {
         line.lineWidth = 1.0
         self.animationView.layer.addSublayer(line)
         
-//        fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+        //        fadeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
         self.lineAnimation.fromValue = 1.0
         self.lineAnimation.toValue = self.view.frame.size.width
         self.lineAnimation.duration = 2
@@ -52,6 +49,17 @@ class ViewController: UIViewController {
         self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         self.animationView.addGestureRecognizer(gestureRecognizer)
+    }
+
+    func addNavigationItems()  {
+        let playBarButton = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Play , target: self, action: #selector(ViewController.playTapped(_:)))
+        let pauseBarButton = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Pause , target: self, action: #selector(ViewController.pausedTapped(_:)))
+        let synthBarButton = UIBarButtonItem()
+        synthBarButton.title = "Synth"
+        synthBarButton.target = self
+        synthBarButton.action = #selector(ViewController.synthTapped(_:))
+        
+        self.navigationItem.rightBarButtonItems = [synthBarButton,pauseBarButton,playBarButton]
     }
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
@@ -66,7 +74,7 @@ class ViewController: UIViewController {
                 }
                 blocks[i].isSelected = !blocks[i].isSelected
                 blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).CGColor :
-                                                             UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
+                    UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
                 
                 let layer:CAShapeLayer = CAShapeLayer()
                 layer.path = UIBezierPath(roundedRect: blocks[i].rect, cornerRadius: 0).CGPath
@@ -185,13 +193,13 @@ class ViewController: UIViewController {
         line.addAnimation(self.lineAnimation, forKey: "transform.translation.y")
         self.conductor.startPlaying()
     }
-        
+    
     @IBAction func synthTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("synthSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-         let synthVC = segue.destinationViewController as! SynthViewController
-            synthVC.configureWithConductor(self.conductor)
+        let synthVC = segue.destinationViewController as! SynthViewController
+        synthVC.configureWithConductor(self.conductor)
     }
 }

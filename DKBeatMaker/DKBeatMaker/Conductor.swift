@@ -43,7 +43,7 @@ class Conductor {
         }
         vco1 = AKMorphingOscillatorBank(waveformArray: [triangle, square, squareWithHighPWM, sawtooth])
         vco1Mixer = AKMixer(vco1)
-
+        
         vco1.releaseDuration = 0.01
         vco1.attackDuration = 0
         vco1.decayDuration = 1.01
@@ -62,7 +62,7 @@ class Conductor {
         
         vco1Sound = AKMIDINode(node: vco1)
         vco1Sound?.enableMIDI(midi.client, name: "VOC1 midi in")
-
+        
         verb = AKReverb2(melodicSound!)
         verb?.dryWetMix = 0.0
         verb?.decayTimeAt0Hz = 7
@@ -93,7 +93,9 @@ class Conductor {
         mixer.connect(snareVerb!)
         mixer.connect(vco1Mixer)
         
-        AudioKit.output = pumper
+        if (AudioKit.output == nil) {
+            AudioKit.output = pumper
+        }
         AudioKit.start()
         
         sequence.newTrack()
@@ -143,7 +145,7 @@ class Conductor {
     func clear() {
         sequence.tracks[0].clear()
     }
-
+    
     func startPlaying() {
         sequence.play()
     }

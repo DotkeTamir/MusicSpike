@@ -7,7 +7,7 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--DK B Maker-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="DKBeatMaker" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,11 +19,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ie-YV-UXn" userLabel="grid view">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ie-YV-UXn" userLabel="grid view">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ub-kg-eew" userLabel="noteGrid">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ub-kg-eew" userLabel="noteGrid">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifb-TO-uun" userLabel="Grid">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifb-TO-uun" userLabel="Grid">
                                 <rect key="frame" x="520" y="540" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.61176470588235299" green="0.62352941176470589" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -65,43 +65,19 @@
                             <constraint firstAttribute="trailing" secondItem="hdG-wT-Rz1" secondAttribute="trailing" id="xlx-A8-6qp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="DK B Maker" id="jUa-Sh-dvM">
-                        <leftBarButtonItems>
-                            <barButtonItem systemItem="play" id="hn5-3y-2FB">
-                                <color key="tintColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="playTapped:" destination="BYZ-38-t0r" id="DJc-BI-GRm"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="pause" id="1as-HC-3he">
-                                <color key="tintColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="pausedTapped:" destination="BYZ-38-t0r" id="fAK-n3-V4V"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Synth" id="efR-Vq-bz6">
-                                <color key="tintColor" red="0.61176470588235299" green="0.62352941176470589" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="synthTapped:" destination="BYZ-38-t0r" id="gTk-7R-WH0"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="animationView" destination="hdG-wT-Rz1" id="ha3-iy-VSK"/>
                         <outlet property="gridChangeButton" destination="ifb-TO-uun" id="g1d-z6-FzM"/>
                         <outlet property="gridVIew" destination="1Ie-YV-UXn" id="IxM-VY-Kcv"/>
                         <outlet property="notesView" destination="2Ub-kg-eew" id="UKi-0E-drs"/>
-                        <outlet property="pauseTapped" destination="1as-HC-3he" id="8rX-CC-8KG"/>
-                        <outlet property="playTapped" destination="hn5-3y-2FB" id="ojv-mq-D27"/>
-                        <outlet property="synthTapped" destination="efR-Vq-bz6" id="5va-jA-UQI"/>
                         <segue destination="1rV-PN-yUQ" kind="show" identifier="synthSegue" id="LPD-zw-4if"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <navigationItem title="Title" id="cky-3m-sM2"/>
             </objects>
-            <point key="canvasLocation" x="409" y="627"/>
+            <point key="canvasLocation" x="365" y="-61"/>
         </scene>
         <!--Synth View Controller-->
         <scene sceneID="EmU-f4-a2h">
@@ -115,7 +91,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zva-ad-14B" userLabel="BackgroundView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zva-ad-14B" userLabel="BackgroundView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPi-Ia-3SN" userLabel="A">
@@ -323,7 +299,7 @@
             </objects>
             <point key="canvasLocation" x="-986" y="-117"/>
         </scene>
-        <!--Arrangement View Controller-->
+        <!--DK Beat Maker-->
         <scene sceneID="dAV-SE-6sO">
             <objects>
                 <collectionViewController id="yuT-ge-6Ts" customClass="ArrangementViewController" customModule="DKBeatMaker" customModuleProvider="target" sceneMemberID="viewController">
@@ -358,14 +334,53 @@
                                     <outlet property="label" destination="9ag-rD-tw4" id="NMc-an-sJs"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="audioControllerCell" id="tWR-yr-C6u" customClass="AudioControllerCell" customModule="DKBeatMaker" customModuleProvider="target">
+                                <rect key="frame" x="61" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qlz-1w-di3" userLabel="Add Clip">
+                                            <rect key="frame" x="18" y="18" width="14" height="14"/>
+                                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" title="Add Clip"/>
+                                            <connections>
+                                                <action selector="addClipTapped:" destination="tWR-yr-C6u" eventType="touchUpInside" id="LAj-cz-bem"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.69803921570000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Qlz-1w-di3" secondAttribute="bottom" constant="10" id="8Ra-9z-ZBt"/>
+                                    <constraint firstItem="Qlz-1w-di3" firstAttribute="top" secondItem="tWR-yr-C6u" secondAttribute="topMargin" constant="10" id="RBa-Rq-jj1"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Qlz-1w-di3" secondAttribute="trailing" constant="10" id="WJ0-dt-gOp"/>
+                                    <constraint firstItem="Qlz-1w-di3" firstAttribute="leading" secondItem="tWR-yr-C6u" secondAttribute="leadingMargin" constant="10" id="lbd-jQ-jm0"/>
+                                </constraints>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="yuT-ge-6Ts" id="E6E-4T-NXq"/>
                             <outlet property="delegate" destination="yuT-ge-6Ts" id="jWe-go-Mys"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="6DR-ey-xH5"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="DK Beat Maker" id="6DR-ey-xH5">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="play" id="8w5-2F-Lf4"/>
+                            <barButtonItem systemItem="pause" id="tEA-iz-Jdu"/>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1f5-Fz-L6T">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="yuT-ge-6Ts" id="2Qv-Di-1T9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="multiDirectionalLayout" destination="ODt-rI-prW" id="6Hr-a3-xwa"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="SeqSegue" id="TGW-56-Qhy"/>
                     </connections>
                 </collectionViewController>

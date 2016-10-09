@@ -1,6 +1,6 @@
 import UIKit
 
-class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
+class MultiDirectionalCollectionViewLayout : UICollectionViewFlowLayout{
     let cellHeight = 60.0
     let cellWidth = 150.0
     let STATUS_BAR = UIApplication.sharedApplication().statusBarFrame.height
@@ -82,7 +82,7 @@ class MultiDirectionalCollectionViewLayout : UICollectionViewLayout{
                     if !(widthOfItems > currentWidth) {
                         widthOfItems = currentWidth
                     }
-
+                    
                 }
                 
             }
