@@ -3,7 +3,7 @@ import UIKit
 let midiClipReuseIdentifier: String = "MidiClipCell"
 let audioControllerReuseIdentifier: String = "audioControllerCell"
 
-class ArrangementViewController: UICollectionViewController, AddClipDelegate, ArrangementViewPresenterDelegate{
+class ArrangementViewController: UICollectionViewController, AddClipDelegate, ArrangementViewSurface{
     var arrangementViewPresenter: ArrangementViewPresenter?
     
     @IBOutlet weak var multiDirectionalLayout: MultiDirectionalCollectionViewLayout!
@@ -40,8 +40,10 @@ class ArrangementViewController: UICollectionViewController, AddClipDelegate, Ar
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if(indexPath.row != 0){
-            self.performSegueWithIdentifier("SeqSegue", sender: self)
+        let identifier: String = (self.arrangementViewPresenter?.seguaIdentifierForIndexPath(indexPath))!
+        
+        if(identifier != ""){
+            self.performSegueWithIdentifier(identifier, sender: self)
         }
         
     }
@@ -54,6 +56,7 @@ class ArrangementViewController: UICollectionViewController, AddClipDelegate, Ar
         self.arrangementViewPresenter?.addMidiClip(trackNumber)
     }
     
+    // MARK: ArrangementViewSurface
     func reloadCollectionView() {
         self.collectionView?.reloadData()
         self.multiDirectionalLayout.dataSourceDidUpdate = true

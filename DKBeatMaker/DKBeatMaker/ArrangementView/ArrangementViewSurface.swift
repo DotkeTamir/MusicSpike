@@ -1,5 +1,5 @@
 import Foundation
 
-protocol ArrangementViewPresenterDelegate {
+protocol ArrangementViewSurface {
     func reloadCollectionView()
 }

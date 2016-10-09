@@ -5,7 +5,7 @@ class ArrangementViewPresenter {
     
     // Could and maybe should be moved to a model object, thinking to do that as a second stage.
     var sections: NSMutableArray
-    var delegate: ArrangementViewPresenterDelegate?
+    var delegate: ArrangementViewSurface?
     
     init() {
         sections = []
@@ -37,13 +37,11 @@ class ArrangementViewPresenter {
         return items
     }
     
-    //    func cellForItemAtIndexPath (indexPath: NSIndexPath) -> UICollectionViewCell {
-    //        if(indexPath.row == 0){
-    //
-    //        } else {
-    //            collectionView.dequeueReusableCellWithReuseIdentifier(midiClipReuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
-    //
-    //
-    //        }
-    //    }
+    func seguaIdentifierForIndexPath(indexPath: NSIndexPath) -> String? {
+        if(indexPath.row != 0){
+                return "SeqSegue"
+        }
+        return nil
+        
+    }
 }
