@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		322AD8601D2E68B800D6C6B2 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */; };
-		322AD8611D2E68B800D6C6B2 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		32182E281D47885F00A707CB /* MidiNoteBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32182E271D47885F00A707CB /* MidiNoteBlock.swift */; };
+		32698FA01D4FED6400499DDE /* MidiNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32698F9F1D4FED6400499DDE /* MidiNote.swift */; };
 		3280959F1D25DF840000FCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3280959E1D25DF840000FCE0 /* AppDelegate.swift */; };
 		328095A11D25DF840000FCE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328095A01D25DF840000FCE0 /* ViewController.swift */; };
 		328095A41D25DF840000FCE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328095A21D25DF840000FCE0 /* Main.storyboard */; };
@@ -16,6 +16,9 @@
 		328095A91D25DF840000FCE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328095A71D25DF840000FCE0 /* LaunchScreen.storyboard */; };
 		328095B41D25DF840000FCE0 /* DotkeMusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328095B31D25DF840000FCE0 /* DotkeMusicTests.swift */; };
 		328095BF1D25DF840000FCE0 /* DotkeMusicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328095BE1D25DF840000FCE0 /* DotkeMusicUITests.swift */; };
+		3282E6A41D51FF560035FEB2 /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3282E6A31D51FF560035FEB2 /* Conductor.swift */; };
+		3282E6B31D5203A00035FEB2 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3282E6B21D5203A00035FEB2 /* AudioKit.framework */; };
+		3282E6B41D5203A00035FEB2 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3282E6B21D5203A00035FEB2 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		322AD8621D2E68B800D6C6B2 /* Embed Frameworks */ = {
+		3282E6B11D5203790035FEB2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				322AD8611D2E68B800D6C6B2 /* AudioKit.framework in Embed Frameworks */,
+				3282E6B41D5203A00035FEB2 /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,7 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
+		32182E271D47885F00A707CB /* MidiNoteBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidiNoteBlock.swift; sourceTree = "<group>"; };
+		32698F9F1D4FED6400499DDE /* MidiNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidiNote.swift; sourceTree = "<group>"; };
 		3280959B1D25DF840000FCE0 /* DotkeMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotkeMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3280959E1D25DF840000FCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		328095A01D25DF840000FCE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 		328095BA1D25DF840000FCE0 /* DotkeMusicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DotkeMusicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		328095BE1D25DF840000FCE0 /* DotkeMusicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotkeMusicUITests.swift; sourceTree = "<group>"; };
 		328095C01D25DF840000FCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3282E6A31D51FF560035FEB2 /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
+		3282E6B21D5203A00035FEB2 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				322AD8601D2E68B800D6C6B2 /* AudioKit.framework in Frameworks */,
+				3282E6B31D5203A00035FEB2 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +101,7 @@
 		328095921D25DF840000FCE0 = {
 			isa = PBXGroup;
 			children = (
-				322AD85F1D2E68B800D6C6B2 /* AudioKit.framework */,
+				3282E6B21D5203A00035FEB2 /* AudioKit.framework */,
 				3280959D1D25DF840000FCE0 /* DotkeMusic */,
 				328095B21D25DF840000FCE0 /* DotkeMusicTests */,
 				328095BD1D25DF840000FCE0 /* DotkeMusicUITests */,
@@ -122,6 +128,9 @@
 				328095A51D25DF840000FCE0 /* Assets.xcassets */,
 				328095A71D25DF840000FCE0 /* LaunchScreen.storyboard */,
 				328095AA1D25DF840000FCE0 /* Info.plist */,
+				32182E271D47885F00A707CB /* MidiNoteBlock.swift */,
+				32698F9F1D4FED6400499DDE /* MidiNote.swift */,
+				3282E6A31D51FF560035FEB2 /* Conductor.swift */,
 			);
 			path = DotkeMusic;
 			sourceTree = "<group>";
@@ -154,7 +163,7 @@
 				328095971D25DF840000FCE0 /* Sources */,
 				328095981D25DF840000FCE0 /* Frameworks */,
 				328095991D25DF840000FCE0 /* Resources */,
-				322AD8621D2E68B800D6C6B2 /* Embed Frameworks */,
+				3282E6B11D5203790035FEB2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,6 +287,9 @@
 			files = (
 				328095A11D25DF840000FCE0 /* ViewController.swift in Sources */,
 				3280959F1D25DF840000FCE0 /* AppDelegate.swift in Sources */,
+				3282E6A41D51FF560035FEB2 /* Conductor.swift in Sources */,
+				32698FA01D4FED6400499DDE /* MidiNote.swift in Sources */,
+				32182E281D47885F00A707CB /* MidiNoteBlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,14 +433,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DotkeMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dotke.DotkeMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -436,9 +452,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DotkeMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

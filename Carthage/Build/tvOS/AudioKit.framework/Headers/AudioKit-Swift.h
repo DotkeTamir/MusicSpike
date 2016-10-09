@@ -93,10 +93,10 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if defined(__has_feature) && __has_feature(modules)
 @import ObjectiveC;
+@import AVFoundation;
 @import Foundation;
 @import Accelerate;
 @import CoreGraphics;
-@import AVFoundation;
 #endif
 
 #import <AudioKit/AudioKit.h>
@@ -118,6 +118,33 @@ SWIFT_CLASS("_TtC8AudioKit6AKNode")
 
 /// Connect this node to another
 - (void)addConnectionPoint:(AKNode * _Nonnull)node;
+@end
+
+
+
+/// 3-D Spatialization of the input
+SWIFT_CLASS("_TtC8AudioKit10AK3DPanner")
+@interface AK3DPanner : AKNode
+
+/// Position of sound source along x-axis
+@property (nonatomic) double x;
+
+/// Position of sound source along y-axis
+@property (nonatomic) double y;
+
+/// Position of sound source along z-axis
+@property (nonatomic) double z;
+
+/// Initialize the panner node
+///
+/// \param input Node to pan in 3D Space
+///
+/// \param x x-axis location in meters
+///
+/// \param y y-axis location in meters
+///
+/// \param z z-axis location in meters
+- (nonnull instancetype)init:(AKNode * _Nonnull)input x:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -207,15 +234,146 @@ SWIFT_CLASS("_TtC8AudioKit18AKAmplitudeTracker")
 - (void)stop;
 @end
 
+@class NSURL;
+@class AVURLAsset;
+@class AVAudioPCMBuffer;
 
 
-/// Simple audio playback class
+/// Audio file, inherits from AVAudioFile and adds functionality
+SWIFT_CLASS("_TtC8AudioKit11AKAudioFile")
+@interface AKAudioFile : AVAudioFile
+
+/// The number of samples can be accessed by .length property, but samplesCount has a less ambiguous meaning
+@property (nonatomic, readonly) int64_t samplesCount;
+
+/// strange that sampleRate is a Double and not an Integer !...
+@property (nonatomic, readonly) double sampleRate;
+
+/// Number of channels, 1 for mono, 2 for stereo...
+@property (nonatomic, readonly) uint32_t channelCount;
+
+/// Duration in seconds
+@property (nonatomic, readonly) double duration;
+
+/// true if Audio Samples are interleaved
+@property (nonatomic, readonly) BOOL interleaved;
+
+/// true only if file format is "deinterleaved native-endian float (AVAudioPCMFormatFloat32)"
+@property (nonatomic, readonly) BOOL standard;
+
+/// Human-readable version of common format
+@property (nonatomic, readonly, copy) NSString * _Nonnull commonFormatString;
+
+/// the directory path as a NSURL object
+@property (nonatomic, readonly, strong) NSURL * _Nonnull directoryPath;
+
+/// the file name with extension as a String
+@property (nonatomic, readonly, copy) NSString * _Nonnull fileNamePlusExtension;
+
+/// the file name without extension as a String
+@property (nonatomic, readonly, copy) NSString * _Nonnull fileName;
+
+/// the file extension as a String (without ".")
+@property (nonatomic, readonly, copy) NSString * _Nonnull fileExt;
+
+/// Returns an AVAsset from the AKAudioFile
+@property (nonatomic, readonly, strong) AVURLAsset * _Nonnull avAsset;
+
+/// As The description doesn't provide so much informations, appended the fileFormat.
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+
+/// returns audio data as an Array of float Arrays If stereo: - arraysOfFloats[0] will contain an Array of left channel samples as Floats - arraysOfFloats[1] will contains an Array of right channel samples as Floats
+@property (nonatomic, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull arraysOfFloats;
+
+/// returns audio data as an AVAudioPCMBuffer
+@property (nonatomic, strong) AVAudioPCMBuffer * _Nonnull pcmBuffer;
+
+/// returns the peak level expressed in dB ( -> Float).
+@property (nonatomic) float maxLevel;
+
+/// Initialize the audio file
+///
+/// \param fileURL NSURL of the file
+///
+/// \returns  An initialized AKAudioFile object for reading, or nil if init failed.
+- (nullable instancetype)initForReading:(NSURL * _Nonnull)fileURL error:(NSError * _Nullable * _Null_unspecified)error OBJC_DESIGNATED_INITIALIZER;
+
+/// Initialize the audio file
+///
+/// \param fileURL NSURL of the file
+///
+/// \param format The processing commonFormat to use when reading from the file.
+///
+/// \param interleaved Whether to use an interleaved processing format.
+///
+/// \returns  An initialized AKAudioFile object for reading, or nil if init failed.
+- (nullable instancetype)initForReading:(NSURL * _Nonnull)fileURL commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError * _Nullable * _Null_unspecified)error OBJC_DESIGNATED_INITIALIZER;
+
+/// Initialize the audio file
+///
+/// From Apple doc: The file type to create is inferred from the file extension of fileURL.
+/// This method will overwrite a file at the specified URL if a file already exists.
+///
+/// The file is opened for writing using the standard format, AVAudioPCMFormatFloat32.
+///
+/// Note: It seems that Apple's AVAudioFile class has a bug with .wav files. They cannot be set
+/// with a floating Point encoding. As a consequence, such files will fail to record properly.
+/// So it's better to use .caf (or .aif) files for recording purpose.
+///
+/// \param fileURL NSURL of the file.
+///
+/// \param settings The format of the file to create.
+///
+/// \param format The processing commonFormat to use when writing.
+///
+/// \param interleaved Whether to use an interleaved processing format.
+///
+/// \param error NSError if init failed
+///
+/// \returns  An initialized AKAudioFile for writing, or nil if init failed.
+- (nullable instancetype)initForWriting:(NSURL * _Nonnull)fileURL settings:(NSDictionary<NSString *, id> * _Nonnull)settings commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError * _Nullable * _Null_unspecified)error OBJC_DESIGNATED_INITIALIZER;
+
+/// Super.init inherited from AVAudioFile superclass
+///
+/// From Apple doc: The file type to create is inferred from the file extension of fileURL.
+/// This method will overwrite a file at the specified URL if a file already exists.
+///
+/// The file is opened for writing using the standard format, AVAudioPCMFormatFloat32.
+///
+/// Note: It seems that Apple's AVAudioFile class has a bug with .wav files. They cannot be set
+/// with a floating Point encoding. As a consequence, such files will fail to record properly.
+/// So it's better to use .caf (or .aif) files for recording purpose.
+///
+/// \param fileURL NSURL of the file.
+///
+/// \param settings The settings of the file to create.
+///
+/// \returns  An initialized AKAudioFile for writing, or nil if init failed.
+- (nullable instancetype)initForWriting:(NSURL * _Nonnull)fileURL settings:(NSDictionary<NSString *, id> * _Nonnull)settings error:(NSError * _Nullable * _Null_unspecified)error OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface AKAudioFile (SWIFT_EXTENSION(AudioKit))
+@end
+
+
+@interface AKAudioFile (SWIFT_EXTENSION(AudioKit))
+@end
+
+
+
+/// Not so simple audio playback class
 SWIFT_CLASS("_TtC8AudioKit13AKAudioPlayer")
 @interface AKAudioPlayer : AKNode
 
+/// Will be triggered when AKAudioPlayer has finished to play. (will not as long as loop is on)
+@property (nonatomic, copy) void (^ _Nullable completionHandler)(void);
+
 /// Boolean indicating whether or not to loop the playback
 @property (nonatomic) BOOL looping;
-@property (nonatomic, copy) void (^ _Nullable completionHandler)(void);
+
+/// return the current played AKAudioFile
+@property (nonatomic, readonly, strong) AKAudioFile * _Nonnull audioFile;
 
 /// Total duration of one loop through of the file
 @property (nonatomic, readonly) double duration;
@@ -223,44 +381,64 @@ SWIFT_CLASS("_TtC8AudioKit13AKAudioPlayer")
 /// Output Volume (Default 1)
 @property (nonatomic) double volume;
 
+/// Whether or not the audio player is currently started
+@property (nonatomic, readonly) BOOL isStarted;
+
+/// Current playback time (in seconds)
+@property (nonatomic, readonly) double currentTime;
+
 /// Time within the audio file at the current time
 @property (nonatomic, readonly) double playhead;
 
 /// Pan (Default Center = 0)
 @property (nonatomic) double pan;
 
-/// Whether or not the audio player is currently playing
-@property (nonatomic, readonly) BOOL isStarted;
+/// sets the start time, If it is playing, player will restart playing from the start time each time end time is set
+@property (nonatomic) double startTime;
 
-/// Initialize the player
+/// sets the end time, If it is playing, player will restart playing from the start time each time end time is set
+@property (nonatomic) double endTime;
+
+/// Initialize the audio player
 ///
-/// \param file Path to the audio file
-- (nonnull instancetype)init:(NSString * _Nonnull)file completionHandler:(void (^ _Nullable)(void))completionHandler OBJC_DESIGNATED_INITIALIZER;
+/// Notice that completionCallBack will be triggered from a
+/// background thread. Any UI update should be made using:
+///
+/// <code>dispatch_async(dispatch_get_main_queue()) {
+///    // UI updates...
+/// }
+/// 
+/// </code>
+/// \param file the AKAudioFile to play
+///
+/// \param looping will loop play if set to true, or stop when play ends, so it can trig the completionHandler callBack. Default is false (non looping)
+///
+/// \param completionHandler AKCallback that will be triggered when the player end playing (useful for refreshing UI so we're not playing anymore, we stopped playing...
+///
+/// \returns  an AKAudioPlayer if init succeeds, or nil if init fails. If fails, errors may be catched as it is a throwing init.
+- (nullable instancetype)initWithFile:(AKAudioFile * _Nonnull)file looping:(BOOL)looping error:(NSError * _Nullable * _Null_unspecified)error completionHandler:(void (^ _Nullable)(void))completionHandler OBJC_DESIGNATED_INITIALIZER;
 
 /// Start playback
 - (void)start;
 
-/// Pause playback
-- (void)pause;
-
 /// Stop playback
 - (void)stop;
 
-/// Current playback time (in seconds)
-@property (nonatomic, readonly) double currentTime;
+/// Pause playback
+- (void)pause;
 
-/// Play the file back from a certain time (non-looping)
+/// resets in and out times for playing
+- (BOOL)reloadFileAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
+
+/// Replace player's file with a new AKAudioFile file
+- (BOOL)replaceFile:(AKAudioFile * _Nonnull)file error:(NSError * _Nullable * _Null_unspecified)error;
+
+/// Play the file back from a certain time to an end time (if set)
 ///
 /// \param time Time into the file at which to start playing back
-- (void)playFrom:(double)time;
-
-/// Replace the current audio file with a new audio file
 ///
-/// \param newFile Path to the new audiofile
-- (void)replaceFile:(NSString * _Nonnull)newFile;
-
-/// Reload the file from the disk
-- (void)reloadFile;
+/// \param endTime Time into the file at which to playing back will stop / Loop
+- (void)playFrom:(double)time to:(double)endTime;
 @end
 
 
@@ -292,7 +470,7 @@ SWIFT_CLASS("_TtC8AudioKit9AKAutoWah")
 /// Tells whether the node is processing (ie. started, playing, or active)
 @property (nonatomic, readonly) BOOL isStarted;
 
-/// Initialize this Auto-Wah node
+/// Initialize this autoWah node
 ///
 /// \param input Input node to process
 ///
@@ -312,7 +490,7 @@ SWIFT_CLASS("_TtC8AudioKit9AKAutoWah")
 
 
 
-/// This operation outputs a version of the audio source, amplitude-modified so that its rms power is equal to that of the comparator audio source. Thus a signal that has suffered loss of power (eg., in passing through a filter bank) can be restored by matching it with, for instance, its own source. It should be noted that this modifies amplitude only; output signal is not altered in any other respect.
+/// This node outputs a version of the audio source, amplitude-modified so that its rms power is equal to that of the comparator audio source. Thus a signal that has suffered loss of power (eg., in passing through a filter bank) can be restored by matching it with, for instance, its own source. It should be noted that this modifies amplitude only; output signal is not altered in any other respect.
 ///
 /// \param input Input node to process
 ///
@@ -499,9 +677,16 @@ SWIFT_CLASS("_TtC8AudioKit12AKBitCrusher")
 
 
 
-/// AudioKit version of Apple's Mixer Node
+/// Stereo Booster
+///
+/// \param input Input node to process
+///
+/// \param gain Boosting multiplier.
 SWIFT_CLASS("_TtC8AudioKit9AKBooster")
 @interface AKBooster : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
 
 /// Amplification Factor
 @property (nonatomic) double gain;
@@ -509,10 +694,10 @@ SWIFT_CLASS("_TtC8AudioKit9AKBooster")
 /// Amplification Factor in db
 @property (nonatomic) double dB;
 
-/// Tells whether or not the booster is actually changing the volume of its source.
+/// Tells whether the node is processing (ie. started, playing, or active)
 @property (nonatomic, readonly) BOOL isStarted;
 
-/// Initialize this amplification node
+/// Initialize this gainner node
 ///
 /// \param input AKNode whose output will be amplified
 ///
@@ -686,12 +871,6 @@ SWIFT_CLASS("_TtC8AudioKit12AKCompressor")
 /// \param releaseTime Release Time (secs) ranges from 0.01 to 3 (Default: 0.05)
 ///
 /// \param masterGain Master Gain (dB) ranges from -40 to 40 (Default: 0)
-///
-/// \param compressionAmount Compression Amount (dB) ranges from -40 to 40 (read only)
-///
-/// \param inputAmplitude Input Amplitude (dB) ranges from -40 to 40 (read only)
-///
-/// \param outputAmplitude Output Amplitude (dB) ranges from -40 to 40 (read only)
 - (nonnull instancetype)init:(AKNode * _Nonnull)input threshold:(double)threshold headRoom:(double)headRoom attackTime:(double)attackTime releaseTime:(double)releaseTime masterGain:(double)masterGain OBJC_DESIGNATED_INITIALIZER;
 
 /// Function to start, play, or activate the node, all do the same thing
@@ -701,7 +880,6 @@ SWIFT_CLASS("_TtC8AudioKit12AKCompressor")
 - (void)stop;
 @end
 
-@class NSURL;
 
 
 /// This module will perform partitioned convolution on an input signal using an audio file as an impulse response.
@@ -1253,7 +1431,7 @@ SWIFT_CLASS("_TtC8AudioKit19AKDynamicsProcessor")
 ///
 /// \param input Input node to process
 ///
-/// \param centerFrequency Center frequency. (in Hertz)
+/// \param centerFrequency Center frequency in Hertz
 ///
 /// \param bandwidth The peak/notch bandwidth in Hertz
 ///
@@ -1280,7 +1458,7 @@ SWIFT_CLASS("_TtC8AudioKit17AKEqualizerFilter")
 ///
 /// \param input Input node to process
 ///
-/// \param centerFrequency Center frequency. (in Hertz)
+/// \param centerFrequency Center frequency in Hertz
 ///
 /// \param bandwidth The peak/notch bandwidth in Hertz
 ///
@@ -1361,12 +1539,6 @@ SWIFT_CLASS("_TtC8AudioKit10AKExpander")
 /// \param releaseTime Release Time (secs) ranges from 0.01 to 3 (Default: 0.05)
 ///
 /// \param masterGain Master Gain (dB) ranges from -40 to 40 (Default: 0)
-///
-/// \param compressionAmount Compression Amount (dB) ranges from -40 to 40 (read only)
-///
-/// \param inputAmplitude Input Amplitude (dB) ranges from -40 to 40 (read only)
-///
-/// \param outputAmplitude Output Amplitude (dB) ranges from -40 to 40 (read only)
 - (nonnull instancetype)init:(AKNode * _Nonnull)input threshold:(double)threshold headRoom:(double)headRoom expansionRatio:(double)expansionRatio expansionThreshold:(double)expansionThreshold attackTime:(double)attackTime releaseTime:(double)releaseTime masterGain:(double)masterGain compressionAmount:(double)compressionAmount inputAmplitude:(double)inputAmplitude outputAmplitude:(double)outputAmplitude OBJC_DESIGNATED_INITIALIZER;
 
 /// Function to start, play, or activate the node, all do the same thing
@@ -1397,27 +1569,9 @@ SWIFT_CLASS("_TtC8AudioKit8AKFFTTap")
 
 
 
-/// Parent class for nodes that can be included in a polyphonic instrument
-SWIFT_CLASS("_TtC8AudioKit7AKVoice")
-@interface AKVoice : AKNode
-
-/// Required for the AKToggleable protocol
-@property (nonatomic, readonly) BOOL isStarted;
-
-/// Function to start, play, or activate the node, all do the same thing
-- (void)start;
-
-/// Function to stop or bypass the node, both are equivalent
-- (void)stop;
-
-/// Return a duplication of this voice
-- (AKVoice * _Nonnull)duplicate;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-
 /// Classic FM Synthesis audio generation.
+///
+/// \param waveform Shape of the oscillation
 ///
 /// \param baseFrequency In cycles per second, or Hz, this is the common denominator for the carrier and modulating frequencies.
 ///
@@ -1429,7 +1583,7 @@ SWIFT_CLASS("_TtC8AudioKit7AKVoice")
 ///
 /// \param amplitude Output Amplitude.
 SWIFT_CLASS("_TtC8AudioKit14AKFMOscillator")
-@interface AKFMOscillator : AKVoice
+@interface AKFMOscillator : AKNode
 
 /// Ramp Time represents the speed at which parameters are allowed to change
 @property (nonatomic) double rampTime;
@@ -1454,9 +1608,6 @@ SWIFT_CLASS("_TtC8AudioKit14AKFMOscillator")
 
 /// Initialize the oscillator with defaults
 - (nonnull instancetype)init;
-
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -1486,56 +1637,52 @@ SWIFT_CLASS("_TtC8AudioKit14AKFMOscillator")
 
 
 
-/// This class is for generator nodes that consist of a number of voices that can be played simultaneously for polyphony
-SWIFT_CLASS("_TtC8AudioKit22AKPolyphonicInstrument")
-@interface AKPolyphonicInstrument : AKNode
+/// Bare bones implementation of AKPolyphonic protocol
+SWIFT_CLASS("_TtC8AudioKit16AKPolyphonicNode")
+@interface AKPolyphonicNode : AKNode
 
-/// Array of all voices
-@property (nonatomic, readonly, copy) NSArray<AKVoice *> * _Nonnull voices;
-
-/// Array of available voices
-@property (nonatomic, copy) NSArray<AKVoice *> * _Nonnull availableVoices;
-
-/// Array of only voices currently playing
-@property (nonatomic, copy) NSArray<AKVoice *> * _Nonnull activeVoices;
-
-/// Array of notes being played on the active instruments
-@property (nonatomic, copy) NSArray<NSNumber *> * _Nonnull activeNotes;
-
-/// Output level
-@property (nonatomic) double volume;
-
-/// Alias for volume
-@property (nonatomic) double amplitude;
-
-/// Initialize the polyphonic instrument with a voice and a count
+/// Play a sound corresponding to a MIDI note
 ///
-/// \param voice Template voice which will be copied
+/// \param noteNumber MIDI Note Number
 ///
-/// \param voiceCount Maximum number of simultaneous voices
-- (nonnull instancetype)initWithVoice:(AKVoice * _Nonnull)voice voiceCount:(NSInteger)voiceCount OBJC_DESIGNATED_INITIALIZER;
+/// \param velocity MIDI Velocity
+- (void)playWithNoteNumber:(NSInteger)noteNumber velocity:(NSInteger)velocity;
 
-/// Start playback with MIDI style note and velocity
+/// Stop a sound corresponding to a MIDI note
 ///
-/// \param note MIDI Note Number
-///
-/// \param velocity MIDI Velocity (0-127)
-- (void)playNote:(NSInteger)note velocity:(NSInteger)velocity;
-
-/// Stop playback of a particular note
-///
-/// \param note MIDI Note Number
-- (void)stopNote:(NSInteger)note;
-
-/// Stop all voices
-- (void)panic;
+/// \param noteNumber MIDI Note Number
+- (void)stopWithNoteNumber:(NSInteger)noteNumber;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
-/// A wrapper for AKFMOscillator to make it playable as a polyphonic instrument.
-SWIFT_CLASS("_TtC8AudioKit9AKFMSynth")
-@interface AKFMSynth : AKPolyphonicInstrument
+/// Frequency Modulation Polyphonic Oscillator
+///
+/// \param waveform The waveform of oscillation
+///
+/// \param carrierMultiplier This multiplied by the baseFrequency gives the carrier frequency.
+///
+/// \param modulatingMultiplier This multiplied by the baseFrequency gives the modulating frequency.
+///
+/// \param modulationIndex This multiplied by the modulating frequency gives the modulation amplitude.
+///
+/// \param attackDuration Attack time
+///
+/// \param decayDuration Decay time
+///
+/// \param sustainLevel Sustain Level
+///
+/// \param releaseDuration Release time
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit18AKFMOscillatorBank")
+@interface AKFMOscillatorBank : AKPolyphonicNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
 
 /// This multiplied by the baseFrequency gives the carrier frequency.
 @property (nonatomic) double carrierMultiplier;
@@ -1558,10 +1705,20 @@ SWIFT_CLASS("_TtC8AudioKit9AKFMSynth")
 /// Release time
 @property (nonatomic) double releaseDuration;
 
-/// Instantiate the FM Oscillator Instrument
-///
-/// \param voiceCount Maximum number of voices that will be required
-- (nonnull instancetype)initWithVoiceCount:(NSInteger)voiceCount OBJC_DESIGNATED_INITIALIZER;
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Initialize the oscillator with defaults
+- (nonnull instancetype)init;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)playWithNoteNumber:(NSInteger)noteNumber velocity:(NSInteger)velocity;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stopWithNoteNumber:(NSInteger)noteNumber;
 @end
 
 
@@ -1593,6 +1750,47 @@ SWIFT_CLASS("_TtC8AudioKit29AKFlatFrequencyResponseReverb")
 ///
 /// \param loopDuration The loop duration of the filter, in seconds. This can also be thought of as the delay time or “echo density” of the reverberation.
 - (nonnull instancetype)init:(AKNode * _Nonnull)input reverbDuration:(double)reverbDuration loopDuration:(double)loopDuration OBJC_DESIGNATED_INITIALIZER;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)start;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stop;
+@end
+
+
+
+/// STK Flutee
+///
+/// \param frequency Variable frequency. Values less than the initial frequency will be doubled until it is greater than that.
+///
+/// \param amplitude Amplitude
+SWIFT_CLASS("_TtC8AudioKit7AKFlute")
+@interface AKFlute : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Variable frequency. Values less than the initial frequency will be doubled until it is greater than that.
+@property (nonatomic) double frequency;
+
+/// Amplitude
+@property (nonatomic) double amplitude;
+
+/// Tells whether the node is processing (ie. started, playing, or active)
+@property (nonatomic, readonly) BOOL isStarted;
+
+/// Initialize the STK Flute model
+///
+/// \param frequency Variable frequency. Values less than the initial frequency will be doubled until it is greater than that.
+///
+/// \param amplitude Amplitude
+- (nonnull instancetype)initWithFrequency:(double)frequency amplitude:(double)amplitude OBJC_DESIGNATED_INITIALIZER;
+
+/// Trigger the sound with an optional set of parameters
+///
+/// <ul><li>frequency: Frequency in Hz</li><li>amplitude amplitude: Volume</li></ul>
+- (void)triggerWithFrequency:(double)frequency amplitude:(double)amplitude;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -1650,7 +1848,13 @@ SWIFT_CLASS("_TtC8AudioKit15AKFormantFilter")
 
 
 
-/// This tracks the pitch of signal using the AMDF (Average Magnitude Difference Function) method of pitch following.
+/// This is based on an algorithm originally created by Miller Puckette.
+///
+/// \param input Input node to process
+///
+/// \param hopSize Hop size.
+///
+/// \param peakCount Number of peaks.
 SWIFT_CLASS("_TtC8AudioKit18AKFrequencyTracker")
 @interface AKFrequencyTracker : AKNode
 
@@ -1663,14 +1867,14 @@ SWIFT_CLASS("_TtC8AudioKit18AKFrequencyTracker")
 /// Detected frequency
 @property (nonatomic, readonly) double frequency;
 
-/// Initialize this Pitch-detection node
+/// Initialize this Pitch-tracker node
 ///
 /// \param input Input node to process
 ///
-/// \param minimumFrequency Lower bound of frequency detection
+/// \param hopSize Hop size.
 ///
-/// \param maximumFrequency Upper bound of frequency detection
-- (nonnull instancetype)init:(AKNode * _Nonnull)input minimumFrequency:(double)minimumFrequency maximumFrequency:(double)maximumFrequency OBJC_DESIGNATED_INITIALIZER;
+/// \param peakCount Number of peaks.
+- (nonnull instancetype)init:(AKNode * _Nonnull)input hopSize:(double)hopSize peakCount:(double)peakCount OBJC_DESIGNATED_INITIALIZER;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -1765,7 +1969,7 @@ SWIFT_CLASS("_TtC8AudioKit17AKHighShelfFilter")
 @interface AKHighShelfFilter : AKNode
 
 /// Cut Off Frequency (Hz) ranges from 10000 to 22050 (Default: 10000)
-@property (nonatomic) double cutOffFrequency;
+@property (nonatomic) double cutoffFrequency;
 
 /// Gain (dB) ranges from -40 to 40 (Default: 0)
 @property (nonatomic) double gain;
@@ -1831,6 +2035,53 @@ SWIFT_CLASS("_TtC8AudioKit36AKHighShelfParametricEqualizerFilter")
 ///
 /// \param q Q of the filter. sqrt(0.5) is no resonance.
 - (nonnull instancetype)init:(AKNode * _Nonnull)input centerFrequency:(double)centerFrequency gain:(double)gain q:(double)q OBJC_DESIGNATED_INITIALIZER;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)start;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stop;
+@end
+
+
+
+/// Analogue model of the Korg 35 Lowpass Filter
+///
+/// \param input Input node to process
+///
+/// \param cutoffFrequency Filter cutoff
+///
+/// \param resonance Filter resonance (should be between 0-2)
+///
+/// \param saturation Filter saturation.
+SWIFT_CLASS("_TtC8AudioKit19AKKorgLowPassFilter")
+@interface AKKorgLowPassFilter : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Filter cutoff
+@property (nonatomic) double cutoffFrequency;
+
+/// Filter resonance (should be between 0-2)
+@property (nonatomic) double resonance;
+
+/// Filter saturation.
+@property (nonatomic) double saturation;
+
+/// Tells whether the node is processing (ie. started, playing, or active)
+@property (nonatomic, readonly) BOOL isStarted;
+
+/// Initialize this filter node
+///
+/// \param input Input node to process
+///
+/// \param cutoffFrequency Filter cutoff
+///
+/// \param resonance Filter resonance (should be between 0-2)
+///
+/// \param saturation Filter saturation.
+- (nonnull instancetype)init:(AKNode * _Nonnull)input cutoffFrequency:(double)cutoffFrequency resonance:(double)resonance saturation:(double)saturation OBJC_DESIGNATED_INITIALIZER;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -2001,6 +2252,67 @@ SWIFT_CLASS("_TtC8AudioKit35AKLowShelfParametricEqualizerFilter")
 
 
 
+/// Physical model of a 4 course mandolin
+///
+/// \param detune Detuning of second string in the course (1=Unison (deault), 2=Octave)
+///
+/// \param bodySize Relative size of the mandoline (Default: 1, ranges ~ 0.5 - 2)
+SWIFT_CLASS("_TtC8AudioKit10AKMandolin")
+@interface AKMandolin : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Detuning of second string in the course (1=Unison (deault), 2=Octave)
+@property (nonatomic) double detune;
+
+/// Relative size of the mandoline (Default: 1, ranges ~ 0.5 - 2)
+@property (nonatomic) double bodySize;
+
+/// Initialize the 4 course (string-pair) Mandolin
+///
+/// \param detune Detuning of second string in the course (1=Unison (deault), 2=Octave)
+///
+/// \param bodySize Relative size of the mandoline (Default: 1, ranges ~ 0.5 - 2)
+- (nonnull instancetype)initWithDetune:(double)detune bodySize:(double)bodySize OBJC_DESIGNATED_INITIALIZER;
+
+/// Virutally pressing fingers on all the strings of the mandolin
+///
+/// \param course1Note MIDI note number for course 1
+///
+/// \param course2Note MIDI note number for course 2
+///
+/// \param course3Note MIDI note number for course 3
+///
+/// \param course4Note MIDI note number for course 4
+- (void)prepareChord:(NSInteger)course1Note :(NSInteger)course2Note :(NSInteger)course3Note :(NSInteger)course4Note;
+
+/// Pressing a finger on a course of the mandolin
+///
+/// \param noteNumber MIDI note number of fretted note
+///
+/// \param course Which set of strings to press
+- (void)fretWithNoteNumber:(NSInteger)noteNumber course:(NSInteger)course;
+
+/// Pluck an individual course
+///
+/// \param course Which set of string parirs to pluck
+///
+/// \param position Position lengthwise along the string to pluck (0 - 1)
+///
+/// \param velocity MIDI Velocity as an amplitude of the pluck (0 - 127)
+- (void)pluckWithCourse:(NSInteger)course position:(double)position velocity:(NSInteger)velocity;
+
+/// Strum all strings of the mandolin
+///
+/// \param position Position lengthwise along the string to pluck (0 - 1)
+///
+/// \param velocity MIDI Velocity as an amplitude of the pluck (0 - 127)
+- (void)strum:(double)position velocity:(NSInteger)velocity;
+@end
+
+
+
 /// \param leftBoundaryCondition Boundary condition at left end of bar. 1 = clamped, 2 = pivoting, 3 = free
 ///
 /// \param rightBoundaryCondition Boundary condition at right end of bar. 1 = clamped, 2 = pivoting, 3 = free
@@ -2090,6 +2402,11 @@ SWIFT_CLASS("_TtC8AudioKit7AKMixer")
 
 /// Determine if the mixer is serving any output or if it is stopped.
 @property (nonatomic, readonly) BOOL isStarted;
+
+/// Initialize the mixer node with no inputs, to be connected later
+///
+/// \param inputs A varaiadic list of AKNodes
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 
 /// Connnect another input after initialization
 ///
@@ -2201,7 +2518,7 @@ SWIFT_CLASS("_TtC8AudioKit12AKMoogLadder")
 ///
 /// \param phase Initial phase of waveform, expects a value 0-1
 SWIFT_CLASS("_TtC8AudioKit20AKMorphingOscillator")
-@interface AKMorphingOscillator : AKVoice
+@interface AKMorphingOscillator : AKNode
 
 /// Ramp Time represents the speed at which parameters are allowed to change
 @property (nonatomic) double rampTime;
@@ -2227,14 +2544,67 @@ SWIFT_CLASS("_TtC8AudioKit20AKMorphingOscillator")
 /// Initialize the oscillator with defaults
 - (nonnull instancetype)init;
 
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
-
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
 
 /// Function to stop or bypass the node, both are equivalent
 - (void)stop;
+@end
+
+
+
+/// This is an oscillator with linear interpolation that is capable of morphing between an arbitrary number of wavetables.
+///
+/// \param waveform The waveform of oscillation
+///
+/// \param index Index of the wavetable to use (fractional are okay).
+///
+/// \param attackDuration Attack time
+///
+/// \param decayDuration Decay time
+///
+/// \param sustainLevel Sustain Level
+///
+/// \param releaseDuration Release time
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit24AKMorphingOscillatorBank")
+@interface AKMorphingOscillatorBank : AKPolyphonicNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Index of the wavetable to use (fractional are okay).
+@property (nonatomic) double index;
+
+/// Attack time
+@property (nonatomic) double attackDuration;
+
+/// Decay time
+@property (nonatomic) double decayDuration;
+
+/// Sustain Level
+@property (nonatomic) double sustainLevel;
+
+/// Release time
+@property (nonatomic) double releaseDuration;
+
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Initialize the oscillator with defaults
+- (nonnull instancetype)init;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)playWithNoteNumber:(NSInteger)noteNumber velocity:(NSInteger)velocity;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stopWithNoteNumber:(NSInteger)noteNumber;
 @end
 
 
@@ -2298,34 +2668,7 @@ SWIFT_CLASS("_TtC8AudioKit16AKNodeOutputPlot")
 
 
 
-/// Noise generator that can be played polyphonically as a mix of pink and white noise
-SWIFT_CLASS("_TtC8AudioKit16AKNoiseGenerator")
-@interface AKNoiseGenerator : AKPolyphonicInstrument
-
-/// Balance of white to pink noise
-@property (nonatomic) double whitePinkMix;
-
-/// Attack time
-@property (nonatomic) double attackDuration;
-
-/// Decay time
-@property (nonatomic) double decayDuration;
-
-/// Sustain Level
-@property (nonatomic) double sustainLevel;
-
-/// Release time
-@property (nonatomic) double releaseDuration;
-
-/// Initial the noise generator instrument
-///
-/// \param whitePinkMix Balance of white to pink noise
-///
-/// \param voiceCount Maximum number of simultaneous voices
-- (nonnull instancetype)initWithWhitePinkMix:(double)whitePinkMix voiceCount:(NSInteger)voiceCount OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
+/// Object to handle notifications for events that can affect the audio
 SWIFT_CLASS("_TtC8AudioKit15AKNotifications")
 @interface AKNotifications : NSObject
 
@@ -2371,6 +2714,7 @@ SWIFT_CLASS("_TtC8AudioKit20AKOperationGenerator")
 
 /// Tells whether the node is processing (ie. started, playing, or active)
 @property (nonatomic, readonly) BOOL isStarted;
+@property (nonatomic, copy) NSString * _Nonnull sporth;
 
 /// Parameters for changing internal operations
 @property (nonatomic, copy) NSArray<NSNumber *> * _Nonnull parameters;
@@ -2378,15 +2722,10 @@ SWIFT_CLASS("_TtC8AudioKit20AKOperationGenerator")
 /// Initialize this generator node with a generic sporth stack and a triggering flag
 ///
 /// \param sporth String of valid Sporth code
-- (nonnull instancetype)init:(NSString * _Nonnull)sporth OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSporth:(NSString * _Nonnull)sporth OBJC_DESIGNATED_INITIALIZER;
 
 /// Trigger the sound with current parameters
-- (void)trigger;
-
-/// Trigger the sound with a set of parameters
-///
-/// \param parameters An array of doubles to use as parameters
-- (void)trigger:(NSArray<NSNumber *> * _Nonnull)parameters;
+- (void)trigger:(NSInteger)triggerNumber;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -2407,7 +2746,7 @@ SWIFT_CLASS("_TtC8AudioKit20AKOperationGenerator")
 ///
 /// \param detuningMultiplier Frequency detuning multiplier
 SWIFT_CLASS("_TtC8AudioKit12AKOscillator")
-@interface AKOscillator : AKVoice
+@interface AKOscillator : AKNode
 
 /// Ramp Time represents the speed at which parameters are allowed to change
 @property (nonatomic) double rampTime;
@@ -2430,14 +2769,62 @@ SWIFT_CLASS("_TtC8AudioKit12AKOscillator")
 /// Initialize the oscillator with defaults
 - (nonnull instancetype)init;
 
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
-
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
 
 /// Function to stop or bypass the node, both are equivalent
 - (void)stop;
+@end
+
+
+
+/// Reads from the table sequentially and repeatedly at given frequency. Linear interpolation is applied for table look up from internal phase values.
+///
+/// \param waveform The waveform of oscillation
+///
+/// \param attackDuration Attack time
+///
+/// \param decayDuration Decay time
+///
+/// \param sustainLevel Sustain Level
+///
+/// \param releaseDuration Release time
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit16AKOscillatorBank")
+@interface AKOscillatorBank : AKPolyphonicNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Attack time
+@property (nonatomic) double attackDuration;
+
+/// Decay time
+@property (nonatomic) double decayDuration;
+
+/// Sustain Level
+@property (nonatomic) double sustainLevel;
+
+/// Release time
+@property (nonatomic) double releaseDuration;
+
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Initialize the oscillator with defaults
+- (nonnull instancetype)init;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)playWithNoteNumber:(NSInteger)noteNumber velocity:(NSInteger)velocity;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stopWithNoteNumber:(NSInteger)noteNumber;
 @end
 
 @class UIView;
@@ -2469,16 +2856,93 @@ SWIFT_CLASS("_TtC8AudioKit20AKOutputWaveformPlot")
 /// \param width Width of the view
 ///
 /// \param height Height of the view
-///
-/// \returns  AKView
-+ (UIView * _Nonnull)createView:(CGFloat)width height:(CGFloat)height;
++ (UIView * _Nonnull)createViewWithWidth:(CGFloat)width height:(CGFloat)height;
 @end
 
 
 
-/// A wrapper for AKSquareOscillator to make it playable as a polyphonic instrument.
-SWIFT_CLASS("_TtC8AudioKit10AKPWMSynth")
-@interface AKPWMSynth : AKPolyphonicInstrument
+/// Pulse-Width Modulating Oscillator
+///
+/// \param frequency In cycles per second, or Hz.
+///
+/// \param amplitude Output amplitude
+///
+/// \param pulseWidth Duty cycle width (range 0-1).
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit15AKPWMOscillator")
+@interface AKPWMOscillator : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// In cycles per second, or Hz.
+@property (nonatomic) double frequency;
+
+/// Output amplitude
+@property (nonatomic) double amplitude;
+
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Duty cycle width (range 0-1).
+@property (nonatomic) double pulseWidth;
+
+/// Tells whether the node is processing (ie. started, playing, or active)
+@property (nonatomic, readonly) BOOL isStarted;
+
+/// Initialize the oscillator with defaults
+///
+/// \param frequency In cycles per second, or Hz.
+- (nonnull instancetype)init;
+
+/// Initialize this oscillator node
+///
+/// \param frequency In cycles per second, or Hz.
+///
+/// \param amplitude Output amplitude
+///
+/// \param pulseWidth Duty cycle width (range 0-1).
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+- (nonnull instancetype)initWithFrequency:(double)frequency amplitude:(double)amplitude pulseWidth:(double)pulseWidth detuningOffset:(double)detuningOffset detuningMultiplier:(double)detuningMultiplier OBJC_DESIGNATED_INITIALIZER;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)start;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stop;
+@end
+
+
+
+/// Pulse-Width Modulating Oscillator Bank
+///
+/// \param pulseWidth Duty cycle width (range 0-1).
+///
+/// \param attackDuration Attack time
+///
+/// \param decayDuration Decay time
+///
+/// \param sustainLevel Sustain Level
+///
+/// \param releaseDuration Release time
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit19AKPWMOscillatorBank")
+@interface AKPWMOscillatorBank : AKPolyphonicNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
 
 /// Duty cycle width (range 0-1).
 @property (nonatomic) double pulseWidth;
@@ -2495,10 +2959,39 @@ SWIFT_CLASS("_TtC8AudioKit10AKPWMSynth")
 /// Release time
 @property (nonatomic) double releaseDuration;
 
-/// Instantiate the Square Instrument
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Initialize the oscillator with defaults
 ///
-/// \param voiceCount Maximum number of voices that will be required
-- (nonnull instancetype)initWithVoiceCount:(NSInteger)voiceCount OBJC_DESIGNATED_INITIALIZER;
+/// \param frequency In cycles per second, or Hz.
+- (nonnull instancetype)init;
+
+/// Initialize this oscillator node
+///
+/// \param pulseWidth Duty cycle width (range 0-1).
+///
+/// \param attackDuration Attack time
+///
+/// \param decayDuration Decay time
+///
+/// \param sustainLevel Sustain Level
+///
+/// \param releaseDuration Release time
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+- (nonnull instancetype)initWithPulseWidth:(double)pulseWidth attackDuration:(double)attackDuration decayDuration:(double)decayDuration sustainLevel:(double)sustainLevel releaseDuration:(double)releaseDuration detuningOffset:(double)detuningOffset detuningMultiplier:(double)detuningMultiplier OBJC_DESIGNATED_INITIALIZER;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)playWithNoteNumber:(NSInteger)noteNumber velocity:(NSInteger)velocity;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stopWithNoteNumber:(NSInteger)noteNumber;
 @end
 
 
@@ -2677,6 +3170,109 @@ SWIFT_CLASS("_TtC8AudioKit34AKPeakingParametricEqualizerFilter")
 
 
 
+/// Phase Distortion Oscillator
+///
+/// \param frequency In cycles per second, or Hz.
+///
+/// \param amplitude Output amplitude
+///
+/// \param phaseDistortion Duty cycle width (range 0-1).
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit27AKPhaseDistortionOscillator")
+@interface AKPhaseDistortionOscillator : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// In cycles per second, or Hz.
+@property (nonatomic) double frequency;
+
+/// Output amplitude
+@property (nonatomic) double amplitude;
+
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Duty cycle width (range -1 - -1).
+@property (nonatomic) double phaseDistortion;
+
+/// Tells whether the node is processing (ie. started, playing, or active)
+@property (nonatomic, readonly) BOOL isStarted;
+
+/// Initialize the oscillator with defaults
+- (nonnull instancetype)init;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)start;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stop;
+@end
+
+
+
+/// Phase Distortion Oscillator Bank
+///
+/// \param waveform The waveform of oscillation
+///
+/// \param phaseDistortion Duty cycle width (range 0-1).
+///
+/// \param attackDuration Attack time
+///
+/// \param decayDuration Decay time
+///
+/// \param sustainLevel Sustain Level
+///
+/// \param releaseDuration Release time
+///
+/// \param detuningOffset Frequency offset in Hz.
+///
+/// \param detuningMultiplier Frequency detuning multiplier
+SWIFT_CLASS("_TtC8AudioKit31AKPhaseDistortionOscillatorBank")
+@interface AKPhaseDistortionOscillatorBank : AKPolyphonicNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Duty cycle width (range -1 - 1).
+@property (nonatomic) double phaseDistortion;
+
+/// Attack time
+@property (nonatomic) double attackDuration;
+
+/// Decay time
+@property (nonatomic) double decayDuration;
+
+/// Sustain Level
+@property (nonatomic) double sustainLevel;
+
+/// Release time
+@property (nonatomic) double releaseDuration;
+
+/// Frequency offset in Hz.
+@property (nonatomic) double detuningOffset;
+
+/// Frequency detuning multiplier
+@property (nonatomic) double detuningMultiplier;
+
+/// Initialize the oscillator with defaults
+- (nonnull instancetype)init;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)playWithNoteNumber:(NSInteger)noteNumber velocity:(NSInteger)velocity;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stopWithNoteNumber:(NSInteger)noteNumber;
+@end
+
+
+
 /// This is a phase locked vocoder. It has the ability to play back an audio file loaded into an ftable like a sampler would. Unlike a typical sampler, mincer allows time and pitch to be controlled separately.
 ///
 /// \param audioFileURL Location of the audio file to use.
@@ -2713,7 +3309,7 @@ SWIFT_CLASS("_TtC8AudioKit20AKPhaseLockedVocoder")
 /// \param amplitude Amplitude.
 ///
 /// \param pitchRatio Pitch ratio. A value of. 1  normal, 2 is double speed, 0.5 is halfspeed, etc.
-- (nonnull instancetype)initWithAudioFileURL:(NSURL * _Nonnull)audioFileURL position:(double)position amplitude:(double)amplitude pitchRatio:(double)pitchRatio OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFile:(AVAudioFile * _Nonnull)file position:(double)position amplitude:(double)amplitude pitchRatio:(double)pitchRatio OBJC_DESIGNATED_INITIALIZER;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -2728,7 +3324,7 @@ SWIFT_CLASS("_TtC8AudioKit20AKPhaseLockedVocoder")
 ///
 /// \param amplitude Amplitude. (Value between 0-1).
 SWIFT_CLASS("_TtC8AudioKit11AKPinkNoise")
-@interface AKPinkNoise : AKVoice
+@interface AKPinkNoise : AKNode
 
 /// Ramp Time represents the speed at which parameters are allowed to change
 @property (nonatomic) double rampTime;
@@ -2743,9 +3339,6 @@ SWIFT_CLASS("_TtC8AudioKit11AKPinkNoise")
 ///
 /// \param amplitude Amplitude. (Value between 0-1).
 - (nonnull instancetype)initWithAmplitude:(double)amplitude OBJC_DESIGNATED_INITIALIZER;
-
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -2811,7 +3404,7 @@ SWIFT_CLASS("_TtC8AudioKit14AKPitchShifter")
 ///
 /// \param lowestFrequency This frequency is used to allocate all the buffers needed for the delay. This should be the lowest frequency you plan on using.
 SWIFT_CLASS("_TtC8AudioKit15AKPluckedString")
-@interface AKPluckedString : AKVoice
+@interface AKPluckedString : AKNode
 
 /// Ramp Time represents the speed at which parameters are allowed to change
 @property (nonatomic) double rampTime;
@@ -2834,13 +3427,9 @@ SWIFT_CLASS("_TtC8AudioKit15AKPluckedString")
 /// \param lowestFrequency This frequency is used to allocate all the buffers needed for the delay. This should be the lowest frequency you plan on using.
 - (nonnull instancetype)initWithFrequency:(double)frequency amplitude:(double)amplitude lowestFrequency:(double)lowestFrequency OBJC_DESIGNATED_INITIALIZER;
 
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
-
 /// Trigger the sound with an optional set of parameters
 ///
-/// <ul><li>amplitude amplitude: Volume</li></ul>
-/// \param frequency Frequency in Hz
+/// <ul><li>frequency: Frequency in Hz</li><li>amplitude amplitude: Volume</li></ul>
 - (void)triggerWithFrequency:(double)frequency amplitude:(double)amplitude;
 
 /// Function to start, play, or activate the node, all do the same thing
@@ -2850,6 +3439,46 @@ SWIFT_CLASS("_TtC8AudioKit15AKPluckedString")
 - (void)stop;
 @end
 
+
+
+
+/// The output for reson appears to be very hot, so take caution when using this module.
+///
+/// \param input Input node to process
+///
+/// \param frequency Center frequency of the filter, or frequency position of the peak response.
+///
+/// \param bandwidth Bandwidth of the filter.
+SWIFT_CLASS("_TtC8AudioKit16AKResonantFilter")
+@interface AKResonantFilter : AKNode
+
+/// Ramp Time represents the speed at which parameters are allowed to change
+@property (nonatomic) double rampTime;
+
+/// Center frequency of the filter, or frequency position of the peak response.
+@property (nonatomic) double frequency;
+
+/// Bandwidth of the filter.
+@property (nonatomic) double bandwidth;
+
+/// Tells whether the node is processing (ie. started, playing, or active)
+@property (nonatomic, readonly) BOOL isStarted;
+
+/// Initialize this filter node
+///
+/// \param input Input node to process
+///
+/// \param frequency Center frequency of the filter, or frequency position of the peak response.
+///
+/// \param bandwidth Bandwidth of the filter.
+- (nonnull instancetype)init:(AKNode * _Nonnull)input frequency:(double)frequency bandwidth:(double)bandwidth OBJC_DESIGNATED_INITIALIZER;
+
+/// Function to start, play, or activate the node, all do the same thing
+- (void)start;
+
+/// Function to stop or bypass the node, both are equivalent
+- (void)stop;
+@end
 
 
 
@@ -3089,92 +3718,11 @@ SWIFT_CLASS("_TtC8AudioKit19AKRollingOutputPlot")
 /// \param width Width of the view
 ///
 /// \param height Height of the view
-///
-/// \returns  AKView
-+ (UIView * _Nonnull)createView:(CGFloat)width height:(CGFloat)height;
-@end
-
-
-
-/// Bandlimited sawtooth oscillator This is a bandlimited sawtooth oscillator ported from the "sawtooth" function from the Faust programming language.
-///
-/// \param frequency In cycles per second, or Hz.
-///
-/// \param amplitude Output Amplitude.
-///
-/// \param detuningOffset Frequency offset in Hz.
-///
-/// \param detuningMultiplier Frequency detuning multiplier
-SWIFT_CLASS("_TtC8AudioKit20AKSawtoothOscillator")
-@interface AKSawtoothOscillator : AKVoice
-
-/// Ramp Time represents the speed at which parameters are allowed to change
-@property (nonatomic) double rampTime;
-
-/// In cycles per second, or Hz.
-@property (nonatomic) double frequency;
-
-/// Output Amplitude.
-@property (nonatomic) double amplitude;
-
-/// Frequency offset in Hz.
-@property (nonatomic) double detuningOffset;
-
-/// Frequency detuning multiplier
-@property (nonatomic) double detuningMultiplier;
-
-/// Tells whether the node is processing (ie. started, playing, or active)
-@property (nonatomic, readonly) BOOL isStarted;
-
-/// Initialize the oscillator with defaults
-- (nonnull instancetype)init;
-
-/// Initialize this sawtooth node
-///
-/// \param frequency In cycles per second, or Hz.
-///
-/// \param amplitude Output Amplitude.
-///
-/// \param detuningOffset Frequency offset in Hz.
-///
-/// \param detuningMultiplier Frequency detuning multiplier
-- (nonnull instancetype)initWithFrequency:(double)frequency amplitude:(double)amplitude detuningOffset:(double)detuningOffset detuningMultiplier:(double)detuningMultiplier OBJC_DESIGNATED_INITIALIZER;
-
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
-
-/// Function to start, play, or activate the node, all do the same thing
-- (void)start;
-
-/// Function to stop or bypass the node, both are equivalent
-- (void)stop;
-@end
-
-
-
-/// A wrapper for AKSawtoothVoice to make it playable as a polyphonic instrument.
-SWIFT_CLASS("_TtC8AudioKit15AKSawtoothSynth")
-@interface AKSawtoothSynth : AKPolyphonicInstrument
-
-/// Attack time
-@property (nonatomic) double attackDuration;
-
-/// Decay time
-@property (nonatomic) double decayDuration;
-
-/// Sustain Level
-@property (nonatomic) double sustainLevel;
-
-/// Release time
-@property (nonatomic) double releaseDuration;
-
-/// Instantiate the Sawtooth Instrument
-///
-/// \param voiceCount Maximum number of voices that will be required
-- (nonnull instancetype)initWithVoiceCount:(NSInteger)voiceCount OBJC_DESIGNATED_INITIALIZER;
++ (UIView * _Nonnull)createViewWithWidth:(CGFloat)width height:(CGFloat)height;
 @end
 
 @class AVAudioFormat;
+@class AVAudioSession;
 
 
 /// Global settings for AudioKit
@@ -3211,70 +3759,21 @@ SWIFT_CLASS("_TtC8AudioKit10AKSettings")
 /// Allows AudioKit to send Notifications
 + (BOOL)notificationsEnabled;
 + (void)setNotificationsEnabled:(BOOL)value;
+
+/// If set to true, Recording will stop after some delay to compensate latency between time recording is stopped and time it is written to file If set to false (the default value) , stopping record will be immediate, even if the last audio frames haven't been recorded to file yet.
++ (BOOL)fixTruncatedRecordings;
++ (void)setFixTruncatedRecordings:(BOOL)value;
+
+/// Enable AudioKit AVAudioSession Category Management
++ (BOOL)disableAVAudioSessionCategoryManagement;
++ (void)setDisableAVAudioSessionCategoryManagement:(BOOL)value;
+
+/// Shortcut for AVAudioSession.sharedInstance()
++ (AVAudioSession * _Nonnull)session;
+
+/// Checks if headphones are plugged Returns true if headPhones are plugged, otherwise return false
++ (BOOL)headPhonesPlugged;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-
-/// This is a bandlimited square oscillator ported from the "square" function from the Faust programming language.
-///
-/// \param frequency In cycles per second, or Hz.
-///
-/// \param amplitude Output amplitude
-///
-/// \param pulseWidth Duty cycle width (range 0-1).
-///
-/// \param detuningOffset Frequency offset in Hz.
-///
-/// \param detuningMultiplier Frequency detuning multiplier
-SWIFT_CLASS("_TtC8AudioKit22AKSquareWaveOscillator")
-@interface AKSquareWaveOscillator : AKVoice
-
-/// Ramp Time represents the speed at which parameters are allowed to change
-@property (nonatomic) double rampTime;
-
-/// In cycles per second, or Hz.
-@property (nonatomic) double frequency;
-
-/// Output Amplitude.
-@property (nonatomic) double amplitude;
-
-/// Frequency offset in Hz.
-@property (nonatomic) double detuningOffset;
-
-/// Frequency detuning multiplier
-@property (nonatomic) double detuningMultiplier;
-
-/// Duty cycle width (range 0-1).
-@property (nonatomic) double pulseWidth;
-
-/// Tells whether the node is processing (ie. started, playing, or active)
-@property (nonatomic, readonly) BOOL isStarted;
-
-/// Initialize the oscillator with defaults
-- (nonnull instancetype)init;
-
-/// Initialize this oscillator node
-///
-/// \param frequency In cycles per second, or Hz.
-///
-/// \param amplitude Output amplitude
-///
-/// \param pulseWidth Duty cycle width (range 0-1).
-///
-/// \param detuningOffset Frequency offset in Hz.
-///
-/// \param detuningMultiplier Frequency detuning multiplier
-- (nonnull instancetype)initWithFrequency:(double)frequency amplitude:(double)amplitude pulseWidth:(double)pulseWidth detuningOffset:(double)detuningOffset detuningMultiplier:(double)detuningMultiplier OBJC_DESIGNATED_INITIALIZER;
-
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
-
-/// Function to start, play, or activate the node, all do the same thing
-- (void)start;
-
-/// Function to stop or bypass the node, both are equivalent
-- (void)stop;
 @end
 
 
@@ -3315,37 +3814,6 @@ SWIFT_CLASS("_TtC8AudioKit17AKStringResonator")
 
 /// Function to stop or bypass the node, both are equivalent
 - (void)stop;
-@end
-
-
-
-/// Kick Drum Synthesizer Instrument
-SWIFT_CLASS("_TtC8AudioKit11AKSynthKick")
-@interface AKSynthKick : AKPolyphonicInstrument
-
-/// Create the synth kick instrument
-///
-/// \param voiceCount Number of voices (usually two is plenty for drums)
-- (nonnull instancetype)initWithVoiceCount:(NSInteger)voiceCount OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-
-/// Snare Drum Synthesizer Instrument
-SWIFT_CLASS("_TtC8AudioKit12AKSynthSnare")
-@interface AKSynthSnare : AKPolyphonicInstrument
-
-/// Create the synth snare instrument
-///
-/// \param voiceCount Number of voices (usually two is plenty for drums)
-- (nonnull instancetype)initWithVoiceCount:(NSInteger)voiceCount duration:(double)duration resonance:(double)resonance OBJC_DESIGNATED_INITIALIZER;
-
-/// Stop playback of a particular voice
-///
-/// \param voice Voice to stop
-///
-/// \param note MIDI Note Number
-- (void)stopVoice:(AKVoice * _Nonnull)voice note:(NSInteger)note;
 @end
 
 
@@ -3592,6 +4060,8 @@ SWIFT_CLASS("_TtC8AudioKit12AKToneFilter")
 /// \param input Input node to process
 ///
 /// \param frequency Frequency (Hz)
+///
+/// \param depth Depth
 SWIFT_CLASS("_TtC8AudioKit9AKTremolo")
 @interface AKTremolo : AKNode
 
@@ -3601,64 +4071,11 @@ SWIFT_CLASS("_TtC8AudioKit9AKTremolo")
 /// Frequency (Hz)
 @property (nonatomic) double frequency;
 
-/// Tells whether the node is processing (ie. started, playing, or active)
-@property (nonatomic, readonly) BOOL isStarted;
-
-/// Function to start, play, or activate the node, all do the same thing
-- (void)start;
-
-/// Function to stop or bypass the node, both are equivalent
-- (void)stop;
-@end
-
-
-
-/// Bandlimited triangleoscillator This is a bandlimited triangle oscillator ported from the "triangle" function from the Faust programming language.
-///
-/// \param frequency In cycles per second, or Hz.
-///
-/// \param amplitude Output Amplitude.
-///
-/// \param detuningOffset Frequency offset in Hz.
-///
-/// \param detuningMultiplier Frequency detuning multiplier
-SWIFT_CLASS("_TtC8AudioKit20AKTriangleOscillator")
-@interface AKTriangleOscillator : AKVoice
-
-/// Ramp Time represents the speed at which parameters are allowed to change
-@property (nonatomic) double rampTime;
-
-/// In cycles per second, or Hz.
-@property (nonatomic) double frequency;
-
-/// Output Amplitude.
-@property (nonatomic) double amplitude;
-
-/// Frequency offset in Hz.
-@property (nonatomic) double detuningOffset;
-
-/// Frequency detuning multiplier
-@property (nonatomic) double detuningMultiplier;
+/// Depth
+@property (nonatomic) double depth;
 
 /// Tells whether the node is processing (ie. started, playing, or active)
 @property (nonatomic, readonly) BOOL isStarted;
-
-/// Initialize the oscillator with defaults
-- (nonnull instancetype)init;
-
-/// Initialize this oscillator node
-///
-/// \param frequency In cycles per second, or Hz.
-///
-/// \param amplitude Output Amplitude.
-///
-/// \param detuningOffset Frequency offset in Hz.
-///
-/// \param detuningMultiplier Frequency detuning multiplier
-- (nonnull instancetype)initWithFrequency:(double)frequency amplitude:(double)amplitude detuningOffset:(double)detuningOffset detuningMultiplier:(double)detuningMultiplier OBJC_DESIGNATED_INITIALIZER;
-
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -3743,31 +4160,11 @@ SWIFT_CLASS("_TtC8AudioKit15AKVariableDelay")
 
 
 
-
-/// A wrapper for AKOscillator to make it playable as a polyphonic instrument.
-SWIFT_CLASS("_TtC8AudioKit16AKWavetableSynth")
-@interface AKWavetableSynth : AKPolyphonicInstrument
-
-/// Attack time
-@property (nonatomic) double attackDuration;
-
-/// Decay time
-@property (nonatomic) double decayDuration;
-
-/// Sustain Level
-@property (nonatomic) double sustainLevel;
-
-/// Release time
-@property (nonatomic) double releaseDuration;
-@end
-
-
-
 /// White noise generator
 ///
 /// \param amplitude Amplitude. (Value between 0-1).
 SWIFT_CLASS("_TtC8AudioKit12AKWhiteNoise")
-@interface AKWhiteNoise : AKVoice
+@interface AKWhiteNoise : AKNode
 
 /// Ramp Time represents the speed at which parameters are allowed to change
 @property (nonatomic) double rampTime;
@@ -3782,9 +4179,6 @@ SWIFT_CLASS("_TtC8AudioKit12AKWhiteNoise")
 ///
 /// \param amplitude Amplitude. (Value between 0-1).
 - (nonnull instancetype)initWithAmplitude:(double)amplitude OBJC_DESIGNATED_INITIALIZER;
-
-/// Function create an identical new node for use in creating polyphonic instruments
-- (AKVoice * _Nonnull)duplicate;
 
 /// Function to start, play, or activate the node, all do the same thing
 - (void)start;
@@ -3802,6 +4196,7 @@ SWIFT_CLASS("_TtC8AudioKit8AudioKit")
 
 /// Format of AudioKit Nodes
 + (AVAudioFormat * _Nonnull)format;
++ (void)setFormat:(AVAudioFormat * _Nonnull)value;
 
 /// Reference to the AV Audio Engine
 + (AVAudioEngine * _Nonnull)engine;
@@ -3839,8 +4234,15 @@ SWIFT_CLASS("_TtC8AudioKit8AudioKit")
 ///
 /// \param node AKNode to test
 ///
-/// \param samples Number of samples to generate in the test
-+ (void)testOutput:(AKNode * _Nonnull)node samples:(NSInteger)samples;
+/// \param duration Number of seconds to test (accurate to the sample)
++ (void)testWithNode:(AKNode * _Nonnull)node duration:(double)duration;
+
+/// Audition the test to hear what it sounds like
+///
+/// \param node AKNode to test
+///
+/// \param duration Number of seconds to test (accurate to the sample)
++ (void)auditionTestWithNode:(AKNode * _Nonnull)node duration:(double)duration;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
