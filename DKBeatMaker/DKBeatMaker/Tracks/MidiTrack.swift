@@ -9,8 +9,8 @@ class MidiTrack {
         midiClips = []
     }
     
-    func addMidiClip(midiClip: MidiClipCollectionViewCell) {
-        midiClips.addObject(midiClips)
+    func addMidiClip(_ midiClip: MidiClipCollectionViewCell) {
+        midiClips.add(midiClips)
     }
     
     func numberofClips() -> Int {

@@ -9,10 +9,10 @@ class ArrangementViewPresenter {
     }
     
     func addMidiTrack()  {
-        sections.addObject(MidiTrack.init())
+        sections.add(MidiTrack.init())
     }
     
-    func midiTrackForSection(section: Int) -> MidiTrack? {
+    func midiTrackForSection(_ section: Int) -> MidiTrack? {
         return section < sections.count ? (sections[section] as! MidiTrack) : nil
     }
     

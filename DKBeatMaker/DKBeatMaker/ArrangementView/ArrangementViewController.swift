@@ -12,28 +12,28 @@ class ArrangementViewController: UICollectionViewController {
     }
     
     // MARK: UICollectionViewDataSource
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return (self.arrPresenter?.sections.count)!
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         let items: Int = (arrPresenter?.midiTrackForSection(section)?.midiClips.count)!
         return items
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MidiClipCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MidiClipCollectionViewCell
         
-            cell.label.text = "Sec \(indexPath.section)/Item \(indexPath.item)"
+            cell.label.text = "Sec \((indexPath as NSIndexPath).section)/Item \((indexPath as NSIndexPath).item)"
             return cell
     }
     
     // MARK: UICollectionViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("SeqSegue", sender: self)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "SeqSegue", sender: self)
 
     }
     
