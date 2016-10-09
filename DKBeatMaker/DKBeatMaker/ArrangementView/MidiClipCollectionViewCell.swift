@@ -17,6 +17,6 @@ class MidiClipCollectionViewCell: UICollectionViewCell {
     
     func setup() {
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.blackColor().CGColor
+        self.layer.borderColor = UIColor.black.cgColor
     }
 }

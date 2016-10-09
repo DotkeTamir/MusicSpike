@@ -29,9 +29,9 @@ class Conductor {
     let sequenceLength = AKDuration(beats: 1.0 ,tempo: 60)
     
     init() {
-        let triangle: AKTable = AKTable(.Triangle)
-        let square: AKTable   = AKTable(.Square)
-        let sawtooth: AKTable = AKTable(.Sawtooth)
+        let triangle: AKTable = AKTable(.triangle)
+        let square: AKTable   = AKTable(.square)
+        let sawtooth: AKTable = AKTable(.sawtooth)
         var squareWithHighPWM: AKTable = AKTable()
         let size: Int = squareWithHighPWM.values.count
         for i: Int in 0..<size {
@@ -111,7 +111,7 @@ class Conductor {
         sequence.setTempo(30)
     }
     
-    func generateNewMelodicSequence(notes: Array<SeqMidiNote>) {
+    func generateNewMelodicSequence(_ notes: Array<SeqMidiNote>) {
         self.currentNotes = notes
         sequence.tracks[0].clear()
         sequence.tracks[1].clear()
@@ -125,7 +125,7 @@ class Conductor {
         sequence.setLength(sequenceLength)
     }
     
-    func generateDrumSequence(notes: Array<SeqMidiNote>) {
+    func generateDrumSequence(_ notes: Array<SeqMidiNote>) {
         sequence.tracks[1].clear()
         for i in 0 ..< notes.count {
             sequence.tracks[1].add(noteNumber: 60,

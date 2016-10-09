@@ -1,7 +1,7 @@
 import UIKit
 import AudioKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CAAnimationDelegate {
     
     @IBOutlet weak var synthTapped: UIBarButtonItem!
     @IBOutlet weak var pauseTapped: UIBarButtonItem!
@@ -35,9 +35,9 @@ class ViewController: UIViewController {
         self.blocks = self.updateBlocks(self.beatGrid)
         
         line.path = UIBezierPath(roundedRect: CGRect(x: 0 , y: 5, width: 1, height: self.view.frame.size.height),
-                                 cornerRadius: 0).CGPath
-        line.backgroundColor = UIColor(red: 0.61, green: 0.62, blue: 0.68, alpha: 1.0).CGColor
-        line.strokeColor = UIColor(red: 0.61, green: 0.62, blue: 0.68, alpha: 1.0).CGColor
+                                 cornerRadius: 0).cgPath
+        line.backgroundColor = UIColor(red: 0.61, green: 0.62, blue: 0.68, alpha: 1.0).cgColor
+        line.strokeColor = UIColor(red: 0.61, green: 0.62, blue: 0.68, alpha: 1.0).cgColor
         line.lineWidth = 1.0
         self.animationView.layer.addSublayer(line)
         
@@ -49,30 +49,30 @@ class ViewController: UIViewController {
         self.lineAnimation.delegate = self
         conductor.generateNewMelodicSequence(self.midiNotesHighlighted)
         
-        self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
+        self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), for: UIControlState())
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         self.animationView.addGestureRecognizer(gestureRecognizer)
     }
     
-    func handleTap(gestureRecognizer: UIGestureRecognizer) {
-        let tappedPoint: CGPoint = gestureRecognizer.locationInView(self.gridVIew)
+    func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        let tappedPoint: CGPoint = gestureRecognizer.location(in: self.gridVIew)
         
         for i: Int in 0..<self.blocks.count {
-            if(CGRectContainsPoint(blocks[i].rect, tappedPoint)){
+            if(blocks[i].rect.contains(tappedPoint)){
                 if self.blocks[i].isSelected {
                     self.removeMidiNote(blocks[i])
                 } else {
                     self.midiNotesHighlighted.append(blocks[i])
                 }
                 blocks[i].isSelected = !blocks[i].isSelected
-                blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).CGColor :
-                                                             UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
+                blocks[i].noteColor = blocks[i].isSelected ? UIColor(red:0.15, green:0.17, blue:0.29, alpha:1.0).cgColor :
+                                                             UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).cgColor
                 
                 let layer:CAShapeLayer = CAShapeLayer()
-                layer.path = UIBezierPath(roundedRect: blocks[i].rect, cornerRadius: 0).CGPath
+                layer.path = UIBezierPath(roundedRect: blocks[i].rect, cornerRadius: 0).cgPath
                 layer.fillColor = blocks[i].noteColor
                 layer.lineWidth = 1.0
-                layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
+                layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).cgColor
                 self.notesView.layer.addSublayer(layer)
                 
                 break
@@ -82,16 +82,16 @@ class ViewController: UIViewController {
         view.setNeedsLayout()
     }
     
-    func removeMidiNote(midiNote: SeqMidiNote) {
+    func removeMidiNote(_ midiNote: SeqMidiNote) {
         for i: Int in 0..<self.midiNotesHighlighted.count {
-            if CGRectContainsPoint(midiNote.rect, self.midiNotesHighlighted[i].rect.origin){
-                self.midiNotesHighlighted.removeAtIndex(i)
+            if midiNote.rect.contains(self.midiNotesHighlighted[i].rect.origin){
+                self.midiNotesHighlighted.remove(at: i)
                 break
             }
         }
     }
     
-    func createGridLayer(grid: Float) -> CALayer {
+    func createGridLayer(_ grid: Float) -> CALayer {
         let gridLayer: CAShapeLayer = CAShapeLayer()
         let noBlocks: Float = self.noOfBars / grid
         let blockHight: CGFloat = self.view.bounds.size.height / CGFloat(noOfNotesInAnOctave)
@@ -99,32 +99,32 @@ class ViewController: UIViewController {
         
         for row: Int in 0..<Int(noBlocks){
             for col: Int in 0..<noOfNotesInAnOctave {
-                let rect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),(CGFloat(col)*CGFloat(blockHight)),blockWidth,blockHight)
+                let rect = CGRect(x: CGFloat(CGFloat(row)*blockWidth),y: (CGFloat(col)*CGFloat(blockHight)),width: blockWidth,height: blockHight)
                 let layer = CAShapeLayer()
-                layer.path = UIBezierPath(roundedRect: rect, cornerRadius: 0).CGPath
-                layer.fillColor = UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor
+                layer.path = UIBezierPath(roundedRect: rect, cornerRadius: 0).cgPath
+                layer.fillColor = UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).cgColor
                 layer.lineWidth = 1.0
-                layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).CGColor
+                layer.strokeColor = UIColor(red:0.61, green:0.62, blue:0.68, alpha:1.0).cgColor
                 gridLayer.addSublayer(layer)
             }
         }
         return gridLayer
     }
     
-    func shouldAddNote(origiin: CGPoint) -> SeqMidiNote? {
+    func shouldAddNote(_ origiin: CGPoint) -> SeqMidiNote? {
         for i: Int in 0..<self.blocks.count{
-            if(CGPointEqualToPoint(origiin, blocks[i].rect.origin)){
+            if(origiin.equalTo(blocks[i].rect.origin)){
                 return self.blocks[i]
             }
         }
         return nil
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    @IBAction func gridChangeTapped(sender: AnyObject) {
+    @IBAction func gridChangeTapped(_ sender: AnyObject) {
         self.beatGrid /= 2.0;
         
         if(self.beatGrid == 1/32) {
@@ -132,12 +132,12 @@ class ViewController: UIViewController {
         }
         self.gridVIew.layer.sublayers?.removeAll()
         self.gridVIew.layer.addSublayer(self.gridDictionary[self.displayLabelForGridButton(self.beatGrid)]!)
-        self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), forState: UIControlState.Normal)
+        self.gridChangeButton.setTitle(self.displayLabelForGridButton(self.beatGrid), for: UIControlState())
         self.blocks = self.updateBlocks(self.beatGrid)
         view.layoutIfNeeded()
     }
     
-    func displayLabelForGridButton(lBeatGrid: Float) -> String {
+    func displayLabelForGridButton(_ lBeatGrid: Float) -> String {
         if(lBeatGrid == 1){
             return "1"
         } else if(lBeatGrid == (1/2)){
@@ -154,7 +154,7 @@ class ViewController: UIViewController {
         return ""
     }
     
-    func updateBlocks(breaGrid: Float) -> Array<SeqMidiNote> {
+    func updateBlocks(_ breaGrid: Float) -> Array<SeqMidiNote> {
         self.blocks.removeAll()
         let noBlocks: Float = self.noOfBars / beatGrid
         let blockHight: CGFloat = self.view.bounds.size.height / CGFloat( noOfNotesInAnOctave)
@@ -162,12 +162,12 @@ class ViewController: UIViewController {
         
         for row: Int in 0..<Int(noBlocks){
             for col: Int in 0..<noOfNotesInAnOctave {
-                let rect: CGRect = CGRectMake(CGFloat(CGFloat(row)*blockWidth),
-                                              (CGFloat(col) * CGFloat(blockHight)),
-                                              blockWidth,
-                                              blockHight)
+                let rect: CGRect = CGRect(x: CGFloat(CGFloat(row)*blockWidth),
+                                              y: (CGFloat(col) * CGFloat(blockHight)),
+                                              width: blockWidth,
+                                              height: blockHight)
                 let block: SeqMidiNote = SeqMidiNote(rect: rect,
-                                                     noteColor: UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).CGColor,
+                                                     noteColor: UIColor(red:0.35, green:0.36, blue:0.47, alpha:1.0).cgColor,
                                                      noteValue: col,
                                                      notePosition: Float(row)/noBlocks)
                 self.blocks.append(block)
@@ -176,22 +176,22 @@ class ViewController: UIViewController {
         return self.blocks
     }
     
-    @IBAction func pausedTapped(sender: AnyObject) {
-        line.removeAnimationForKey("transform.translation.y")
+    @IBAction func pausedTapped(_ sender: AnyObject) {
+        line.removeAnimation(forKey: "transform.translation.y")
         self.conductor.stopPlaying()
     }
     
-    @IBAction func playTapped(sender: AnyObject) {
-        line.addAnimation(self.lineAnimation, forKey: "transform.translation.y")
+    @IBAction func playTapped(_ sender: AnyObject) {
+        line.add(self.lineAnimation, forKey: "transform.translation.y")
         self.conductor.startPlaying()
     }
         
-    @IBAction func synthTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("synthSegue", sender: self)
+    @IBAction func synthTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "synthSegue", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-         let synthVC = segue.destinationViewController as! SynthViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         let synthVC = segue.destination as! SynthViewController
             synthVC.configureWithConductor(self.conductor)
     }
 }

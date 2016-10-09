@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		320CCC691D8A05B400737E55 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 320CCC681D8A05B400737E55 /* AudioKit.framework */; };
-		320CCC6A1D8A05B400737E55 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 320CCC681D8A05B400737E55 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3275A9441D6CF79500FA80D3 /* SeqMidiNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */; };
 		3275A9461D6CF80B00FA80D3 /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A9451D6CF80B00FA80D3 /* Conductor.swift */; };
 		3275D7821D6E4845006CEF3E /* SynthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275D7811D6E4845006CEF3E /* SynthViewController.swift */; };
@@ -24,6 +22,7 @@
 		32F15CC81D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */; };
 		32F15CCA1D99B99E00148226 /* MidiClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */; };
 		32F15CCD1D99B9F900148226 /* ArrangementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */; };
+		54BA462F1DAA305A006D4722 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BA462E1DAA305A006D4722 /* AudioKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				320CCC6A1D8A05B400737E55 /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,7 +56,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		320CCC681D8A05B400737E55 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		3275A9431D6CF79500FA80D3 /* SeqMidiNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeqMidiNote.swift; path = Seq/SeqMidiNote.swift; sourceTree = "<group>"; };
 		3275A9451D6CF80B00FA80D3 /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
 		3275D7811D6E4845006CEF3E /* SynthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynthViewController.swift; path = Instruments/SynthViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +77,7 @@
 		32F15CC71D99B78900148226 /* MultiDirectionalCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDirectionalCollectionViewLayout.swift; sourceTree = "<group>"; };
 		32F15CC91D99B99E00148226 /* MidiClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidiClipCollectionViewCell.swift; path = ArrangementView/MidiClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		32F15CCC1D99B9F900148226 /* ArrangementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrangementViewController.swift; path = ArrangementView/ArrangementViewController.swift; sourceTree = "<group>"; };
+		54BA462E1DAA305A006D4722 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				320CCC691D8A05B400737E55 /* AudioKit.framework in Frameworks */,
+				54BA462F1DAA305A006D4722 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +109,6 @@
 		32A42E5D1D6525620021B94E = {
 			isa = PBXGroup;
 			children = (
-				320CCC681D8A05B400737E55 /* AudioKit.framework */,
 				32A42E681D6525630021B94E /* DKBeatMaker */,
 				32A42E7D1D6525630021B94E /* DKBeatMakerTests */,
 				32A42E881D6525630021B94E /* DKBeatMakerUITests */,
@@ -132,6 +129,7 @@
 		32A42E681D6525630021B94E /* DKBeatMaker */ = {
 			isa = PBXGroup;
 			children = (
+				54BA462E1DAA305A006D4722 /* AudioKit.framework */,
 				32F15CCB1D99B9C000148226 /* ArrangementView */,
 				32A42E691D6525630021B94E /* AppDelegate.swift */,
 				32A42E6B1D6525630021B94E /* ViewController.swift */,
@@ -245,6 +243,7 @@
 				TargetAttributes = {
 					32A42E651D6525620021B94E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -253,10 +252,12 @@
 					};
 					32A42E791D6525630021B94E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 32A42E651D6525620021B94E;
 					};
 					32A42E841D6525630021B94E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 32A42E651D6525620021B94E;
 					};
 				};
@@ -469,11 +470,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/DKBeatMaker",
 				);
 				INFOPLIST_FILE = DKBeatMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dotke.DKBeatMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -484,11 +487,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/DKBeatMaker",
 				);
 				INFOPLIST_FILE = DKBeatMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dotke.DKBeatMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -500,6 +505,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dotke.DKBeatMakerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKBeatMaker.app/DKBeatMaker";
 			};
 			name = Debug;
@@ -512,6 +518,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dotke.DKBeatMakerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKBeatMaker.app/DKBeatMaker";
 			};
 			name = Release;
@@ -523,6 +530,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dotke.DKBeatMakerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = DKBeatMaker;
 			};
 			name = Debug;
@@ -534,6 +542,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dotke.DKBeatMakerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = DKBeatMaker;
 			};
 			name = Release;

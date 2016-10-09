@@ -18,41 +18,41 @@ class SynthViewController : UIViewController {
         
     }
     
-    func configureWithConductor(conductor: Conductor) {
+    func configureWithConductor(_ conductor: Conductor) {
         self.conductor = conductor
     }
     
-    @IBAction func attackSliderChanged(sender: AnyObject) {
+    @IBAction func attackSliderChanged(_ sender: AnyObject) {
         let slider = sender as! UISlider
         self.conductor.fmOscillator.attackDuration = Double(slider.value)
         self.conductor.vco1.attackDuration = Double(slider.value)
     }
     
-    @IBAction func sastainSLiderChange(sender: AnyObject) {
+    @IBAction func sastainSLiderChange(_ sender: AnyObject) {
         let slider = sender as! UISlider
         self.conductor.fmOscillator.sustainLevel = Double(slider.value)
         self.conductor.vco1.sustainLevel = Double(slider.value)
     }
     
-    @IBAction func releaseSliderChanged(sender: AnyObject) {
+    @IBAction func releaseSliderChanged(_ sender: AnyObject) {
         let slider = sender as! UISlider
         self.conductor.fmOscillator.releaseDuration = Double(slider.value)
         self.conductor.vco1.releaseDuration = Double(slider.value)
     }
     
-    @IBAction func decaySliderChanged(sender: AnyObject) {
+    @IBAction func decaySliderChanged(_ sender: AnyObject) {
         let slider = sender as! UISlider
         self.conductor.fmOscillator.decayDuration = Double(slider.value)
         self.conductor.vco1.decayDuration = Double(slider.value)
     }
     
-    @IBAction func upOctaveTapped(sender: AnyObject) {
+    @IBAction func upOctaveTapped(_ sender: AnyObject) {
         self.conductor.octave = self.conductor.octave + 12
         self.octaveValueLabel.text = String(self.conductor.octave/12)
         self.conductor.generateNewMelodicSequence(self.conductor.currentNotes)
     }
     
-    @IBAction func downOctaveTapped(sender: AnyObject) {
+    @IBAction func downOctaveTapped(_ sender: AnyObject) {
         self.conductor.octave = self.conductor.octave - 12
         self.octaveValueLabel.text = String(self.conductor.octave/12)
         self.conductor.generateNewMelodicSequence(self.conductor.currentNotes)
@@ -60,7 +60,7 @@ class SynthViewController : UIViewController {
     
     @IBOutlet weak var octaveValueLabel: UILabel!
  
-    @IBAction func waveformTapped(sender: AnyObject) {
+    @IBAction func waveformTapped(_ sender: AnyObject) {
         var index = self.conductor.vco1.index
         
         if index > 3 {
